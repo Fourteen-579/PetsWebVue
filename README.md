@@ -1,21 +1,19 @@
-# pets-web-vue
+# 毕业设计使用 
 
-> A Vue.js project
+## ***<u>重要声明</u>***
 
-## Build Setup
+使用vue-admin-template模板
+非常感谢
+来源：https://github.com/PanJiaChen/vue-admin-template
 
-``` bash
-# install dependencies
-npm install
+## TIPS：
 
-# serve with hot reload at localhost:8080
-npm run dev
+- 因为使用了地区选择组件，在使用的时候样式有些误，如果在其他地方跑的时候地区组件样式有问题使用以下解决方法：
 
-# build for production with minification
-npm run build
+  node_modules/vue-area-linkage/dist/index.css
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+  .area-select .area-selected-trigger{
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+  ​    display: block; ----> display: inline;
+
+  }
