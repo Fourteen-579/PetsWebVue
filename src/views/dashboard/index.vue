@@ -1,6 +1,6 @@
 <template>
   <div v-loading="listLoading" class="dashboard-container">
-    <div class="pic-for">
+    <div class="pic-for module">
       <el-carousel trigger="click" height="250px">
         <el-carousel-item v-for="item in rotationPic" :key="item.id">
           <el-image :src="item.url" fit="fill">
@@ -11,6 +11,10 @@
         </el-carousel-item>
       </el-carousel>
     </div>
+
+    <div class="base-for module">
+      <Title titleName="基地名录"/>
+    </div>
   </div>
 </template>
 
@@ -18,8 +22,12 @@
 import {mapGetters} from 'vuex';
 import * as echarts from 'echarts';
 import {getPicByUse} from "@/api/picture";
+import Title from "@/components/Title/index"
 
 export default {
+  components: {
+    Title
+  },
   name: 'Dashboard',
   mounted() {
 
@@ -51,90 +59,30 @@ export default {
 
 .dashboard-container {
 
-}
-
-.pic-for {
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
+  .module{
+    margin-bottom: 20px;
   }
 
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-}
-
-.block {
-  //border-radius: 10px;
-  color: white;
-  display: flow-root;
-  font-weight: bolder;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.50);
-  width: inherit;
-  margin: 10px;
-  text-align: center;
-
-  .block-select {
-    float: right;
-    margin-top: 5px;
-    margin-right: 5px;
-    z-index: 1;
-  }
-
-  .emergency-block {
-    display: block;
-    border-radius: 5px;
-    background-color: #edb6a0;
-    margin: 20px;
-  }
-
-  .other-block {
-    margin: 20px;
-
-
-    .box {
-      border-radius: 5px;
-      display: inline-block;
-      height: 8em;
-      margin: 2em;
-      width: 15em;
-      vertical-align: bottom;
-      text-align: center;
+  .pic-for {
+    .el-carousel__item h3 {
+      color: #475669;
+      font-size: 14px;
+      opacity: 0.75;
+      line-height: 150px;
+      margin: 0;
     }
 
-    .rescue-block {
-      background-color: #668bd3;
-
+    .el-carousel__item:nth-child(2n) {
+      background-color: #99a9bf;
     }
 
-    .adopt-block {
-      background-color: #fca887;
-    }
-
-    .resource-block {
-      background-color: #a4e5f0;
-    }
-
-    .pro-block {
-      background-color: #87e19c;
+    .el-carousel__item:nth-child(2n+1) {
+      background-color: #d3dce6;
     }
   }
 
 }
 
-.block-text {
-  margin: 5px;
-  position: relative;
-  top: 45%;
-  display: inline-block;
-  vertical-align: center;
-}
+
 
 </style>
