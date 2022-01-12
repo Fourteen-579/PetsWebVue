@@ -15,12 +15,13 @@
     <div class="resource-for module">
       <Title titleName="资源对接"/>
       <div class="base-block">
-        <BaseBlock v-for="item in resourceItem" :item="item" :labelOption="labelOption"/>
+        <RescourceBlock v-for="item in resourceItem" :item="item" :labelOption="labelOption"/>
       </div>
     </div>
 
     <div class="base-for module">
       <Title titleName="基地名录"/>
+      <BaseBlock v-for="item in baseItem" :item="item"/>
     </div>
   </div>
 </template>
@@ -33,11 +34,13 @@ import {getPicByUse} from "@/api/picture";
 import {getUserList} from "@/api/user";
 import {getResourceList} from "@/api/resource";
 import Title from "@/components/Title/index"
+import RescourceBlock from "@/components/RescourceBlock/index"
 import BaseBlock from "@/components/BaseBlock/index"
 
 export default {
   components: {
     Title,
+    RescourceBlock,
     BaseBlock
   },
   name: 'Dashboard',
