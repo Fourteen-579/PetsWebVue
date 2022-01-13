@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="block-item resource-botton">
-      <el-button size="mini" round>{{ item.type != 'DONATE' ? '我需要它！' : '我要捐赠！' }}</el-button>
+      <el-button type="success" plain size="mini" round>{{ item.type != 'DONATE' ? '我需要它！' : '我要捐赠！' }}</el-button>
     </div>
   </div>
 </template>
@@ -77,7 +77,6 @@ export default {
 
 <style scoped lang="scss">
 .resource-block {
-  font-size: 15px;
   width: 15em;
   height: 12em;
   vertical-align: top;
@@ -101,6 +100,7 @@ export default {
     -webkit-box-orient: vertical;
     margin-top: 10px;
     font-weight: bolder;
+    font-size: 18px;
   }
 
   .resource-text {

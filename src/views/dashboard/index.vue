@@ -13,16 +13,27 @@
     </div>
 
     <div class="resource-for module">
-      <Title titleName="资源对接"/>
+      <Title titleName="资源对接" description="搭建基地需求方和捐赠意向方的资源共享平台"/>
       <div class="base-block">
         <RescourceBlock v-for="item in resourceItem" :item="item" :labelOption="labelOption"/>
       </div>
     </div>
 
     <div class="base-for module">
-      <Title titleName="基地名录"/>
+      <Title titleName="基地名录" description="每一个地区的基地都要全力以赴的救助流浪动物"/>
+      <div class="base-for-img">
+        <div class="base-for-img-title">
+          流浪动物
+        </div>
+        <div class="base-for-img-text">
+          你可以不爱它们，但请不要践踏它们。
+        </div>
+        <img class="base-for-img-pic" src="http://localhost:8089/img/15e45d5b50ef00974f5784fbe5acc41e.jpeg"/>
+      </div>
       <BaseBlock v-for="item in baseItem" :item="item"/>
     </div>
+
+
   </div>
 </template>
 
@@ -36,6 +47,7 @@ import {getResourceList} from "@/api/resource";
 import Title from "@/components/Title/index"
 import RescourceBlock from "@/components/RescourceBlock/index"
 import BaseBlock from "@/components/BaseBlock/index"
+
 
 export default {
   components: {
@@ -151,6 +163,31 @@ export default {
     }
   }
 
+  .base-for {
+    .base-for-img {
+      position: relative;
+      margin: 10px;
+      display: inline-flex;
+      color: white;
+
+      .base-for-img-title {
+        position: absolute;
+        top: 2em;
+        left: 3em;
+        font-weight: bolder;
+      }
+
+      .base-for-img-text {
+        position: absolute;
+        top: 5em;
+        left: 3em;
+      }
+
+      .base-for-img-pic {
+        height: 15em;
+      }
+    }
+  }
 }
 
 

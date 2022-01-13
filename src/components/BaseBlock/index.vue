@@ -5,10 +5,20 @@
       {{ item.nickName }}
     </div>
     <div class="block-item base-slogan base-text">
-      {{ item.slogan }}
+      {{ item.slogan != null && item.slogan != '' ? item.slogan : '该基地暂无口号' }}
     </div>
     <div class="block-item base-describes base-text">
-      {{ item.describes }}
+      {{ item.describes != null && item.describes != '' ? item.describes : '该基地暂无描述' }}
+    </div>
+    <div class="block-item base-nums">
+      <div class="base-nums-rescue base-text">
+        <svg-icon icon-class="rescue"/>
+        已救助动物数量：{{ item.rescueNum }}
+      </div>
+      <div class="base-nums-adopt base-text">
+        <svg-icon icon-class="adopt"/>
+        已被领养动物数量：{{ item.adoptNum }}
+      </div>
     </div>
     <div class="block-item base-time-location">
       <div class="base-time">
@@ -32,6 +42,7 @@
         </div>
 
       </div>
+
     </div>
   </div>
 </template>
@@ -47,20 +58,22 @@ export default {
       required: true
     }
   },
+  created() {
+  },
   data() {
     return {
       //地区数据
-      pcaa: pcaa
+      pcaa: pcaa,
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
 <style scoped lang="scss">
 .base-block {
-  font-size: 15px;
   width: 15em;
-  height: 9em;
+  height: 15em;
   vertical-align: top;
   margin: 10px;
   border-radius: 10px;
@@ -74,6 +87,7 @@ export default {
   }
 
   .base-text {
+    font-size: 15px;
     display: -webkit-box;
     overflow: hidden;
     white-space: normal !important;
@@ -86,15 +100,23 @@ export default {
 
   .base-name {
     font-weight: bolder;
+    font-size: 18px;
   }
 
   .base-slogan {
+    font-weight: lighter;
+    font-size: 15px;
   }
 
   .base-describes {
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     font-size: 10px;
     color: #8c939d;
+  }
+
+  .base-nums {
+    font-weight: lighter;
+    font-size: 15px;
   }
 
   .base-time-location {
@@ -112,11 +134,11 @@ export default {
 
     .base-time {
       display: inline-flex;
-      margin-left: 2px;
+      margin-left: 1px;
 
       .base-time-text {
         margin-left: 2px;
-        font-size: 4px;
+        font-size: 3px;
         color: #8c939d;
         vertical-align: top;
         line-height: 15px;

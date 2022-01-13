@@ -10,6 +10,11 @@ export default {
 }
 </script>
 <style>
+
+#app {
+  font-family: 微软雅黑;
+}
+
 .page-component {
   float: right;
   margin: 20px 20px 20px 0px;
