@@ -9,6 +9,9 @@
     <div v-if="description" class="text-small border">
       {{ description }}
     </div>
+    <div v-if="link" class="text-link border">
+      <router-link :to="link">{{ linkName }}</router-link>
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,13 @@ export default {
     },
     description: {
       type: String
+    },
+    link: {
+      type: String
+    },
+    linkName: {
+      type: String,
+      default: '更多'
     }
   },
 }
@@ -46,6 +56,12 @@ export default {
     font-size: 10px;
     color: #8c939d;
     margin-left: 15px;
+  }
+
+  .text-link {
+    font-size: 12px;
+    margin-left: 15px;
+    color: blue;
   }
 
   .border {

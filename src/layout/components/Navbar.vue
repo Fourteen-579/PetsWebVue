@@ -3,7 +3,7 @@
     <!--    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar"/>-->
 
     <!--    <breadcrumb class="breadcrumb-container"/>-->
-    <div class="logo">
+    <div class="logo" style="width: 16em">
       <img src="http://localhost:8089/img/logo.png" style="width: 16em"/>
     </div>
     <div class="menu">

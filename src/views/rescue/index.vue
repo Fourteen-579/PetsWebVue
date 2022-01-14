@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="to-rescued">
-      <Title titleName="待救助动物"/>
-      <RescueBlock :rescue-item="item" v-for="item in list"/>
+      <Title titleName="待救助动物" link="/"/>
+      <RescueBlock :rescue-item="item" v-for="(item,index) in list" :background-color="color[index]"/>
     </div>
   </div>
 </template>
@@ -62,6 +62,18 @@ export default {
           value: 'END',
           label: '结束'
         }
+      ],
+      color: [
+        'linear-gradient(to bottom right, #74C58D,#549227)',
+        'linear-gradient(to bottom right, rgb(253, 182, 43), rgb(101, 175, 23))',
+        'linear-gradient(to bottom right, rgb(101, 175, 23), rgb(152, 215, 221))',
+        'linear-gradient(to bottom right, rgb(152, 215, 221),rgb(156, 182, 189))',
+        'linear-gradient(to bottom right, rgb(156, 182, 189),rgb(251, 108, 7))',
+        'linear-gradient(to bottom right, #74C58D,#549227)',
+        'linear-gradient(to bottom right, rgb(253, 182, 43), rgb(101, 175, 23))',
+        'linear-gradient(to bottom right, rgb(101, 175, 23), rgb(152, 215, 221))',
+        'linear-gradient(to bottom right, rgb(152, 215, 221),rgb(156, 182, 189))',
+        'linear-gradient(to bottom right, rgb(156, 182, 189),rgb(251, 108, 7))'
       ]
     }
   },
@@ -74,7 +86,7 @@ export default {
       this.listLoading = true
       let search = {
         page: 1,
-        pageSize: 5,
+        pageSize: 8,
         status: 'WAITING'
       }
       getRescueList(search).then(response => {

@@ -82,7 +82,7 @@ export default {
   vertical-align: top;
   margin: 10px;
   border-radius: 10px;
-  border: 1px solid #B8E4A5FF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.50);
   display: inline-block;
 
   .block-item {
