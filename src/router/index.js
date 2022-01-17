@@ -44,6 +44,30 @@ export const constantRoutes = [
   },
 
   {
+    path: '/rescued',
+    component: Layout,
+    redirect: '/rescued',
+    children: [{
+      path: 'rescued',
+      name: 'rescued',
+      component: () => import('@/views/rescue/rescued'),
+    }],
+    hidden: true
+  },
+
+  {
+    path: '/toRescued',
+    component: Layout,
+    redirect: '/toRescued',
+    children: [{
+      path: 'toRescued',
+      name: 'toRescued',
+      component: () => import('@/views/rescue/toRescued'),
+    }],
+    hidden: true
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
