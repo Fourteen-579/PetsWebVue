@@ -4,7 +4,7 @@
 
     <!--    <breadcrumb class="breadcrumb-container"/>-->
     <div class="logo" style="width: 16em">
-      <img src="http://localhost:8089/img/logo.png" style="width: 16em"/>
+      <img :src="url" style="width: 16em"/>
     </div>
     <div class="menu">
       <el-menu class="el-menu-demo" mode="horizontal">
@@ -61,6 +61,11 @@ export default {
     routes() {
       return this.$router.options.routes
     },
+  },
+  data() {
+    return {
+      url: this.$store.state.settings.url + "img/logo.png",
+    }
   },
   methods: {
     toggleSideBar() {

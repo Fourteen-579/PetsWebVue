@@ -28,7 +28,7 @@
         <div class="base-for-img-text">
           你可以不爱它们，但请不要践踏它们。
         </div>
-        <img class="base-for-img-pic" src="http://localhost:8089/img/15e45d5b50ef00974f5784fbe5acc41e.jpeg"/>
+        <img class="base-for-img-pic" :src="url"/>
       </div>
       <BaseBlock v-for="item in baseItem" :item="item"/>
     </div>
@@ -45,7 +45,7 @@ import {getPicByUse} from "@/api/picture";
 import {getUserList} from "@/api/user";
 import {getResourceList} from "@/api/resource";
 import Title from "@/components/Title/index"
-import RescourceBlock from "@/components/RescourceBlock/index"
+import RescourceBlock from "@/components/RescourceBlock"
 import BaseBlock from "@/components/BaseBlock/index"
 
 
@@ -72,6 +72,7 @@ export default {
   watch: {},
   data() {
     return {
+      url: this.$store.state.settings.url + 'img/15e45d5b50ef00974f5784fbe5acc41e.jpeg',
       // 加载变量
       listLoading: false,
       //轮播图数据
@@ -110,6 +111,7 @@ export default {
       }
       getUserList(param).then((res) => {
         this.baseItem = res.data.records
+        console.log(this.baseItem)
       }).finally(() => {
         this.listLoading = false;
       })
@@ -184,6 +186,7 @@ export default {
       }
 
       .base-for-img-pic {
+
         height: 15em;
       }
     }

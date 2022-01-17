@@ -1,15 +1,16 @@
 import defaultSettings from '@/settings'
 
-const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
+const {showSettings, fixedHeader, sidebarLogo, url} = defaultSettings
 
 const state = {
   showSettings: showSettings,
   fixedHeader: fixedHeader,
-  sidebarLogo: sidebarLogo
+  sidebarLogo: sidebarLogo,
+  url: url
 }
 
 const mutations = {
-  CHANGE_SETTING: (state, { key, value }) => {
+  CHANGE_SETTING: (state, {key, value}) => {
     // eslint-disable-next-line no-prototype-builtins
     if (state.hasOwnProperty(key)) {
       state[key] = value
@@ -18,7 +19,7 @@ const mutations = {
 }
 
 const actions = {
-  changeSetting({ commit }, data) {
+  changeSetting({commit}, data) {
     commit('CHANGE_SETTING', data)
   }
 }

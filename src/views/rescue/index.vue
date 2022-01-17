@@ -1,28 +1,36 @@
 <template>
   <div class="app-container">
-    <div class="to-rescued">
+    <div class="main-block to-rescued">
       <Title titleName="待救助动物" link="/"/>
-      <RescueBlock :rescue-item="item" v-for="(item,index) in list" :background-color="color[index]"/>
+      <ToRescueBlock :rescue-item="item" v-for="item in toRescuedList"/>
+    </div>
+    <div class="main-block rescued">
+      <Title title-name="已救助动物" link="/"/>
+      <Rescued :rescue-item="item" v-for="item in rescuedList"/>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import {getRescueList, updateRescue, addRescue, deletedRescue} from '@/api/resuce'
 import {getUserList} from '@/api/user'
 import {getAnimalList} from '@/api/animal'
-import RescueBlock from "@/components/RescueBlock/index"
+import ToRescueBlock from "@/components/RescueBlock/toRescued"
+import Rescued from "@/components/RescueBlock/Rescued";
 import Title from "@/components/Title/index"
 
 export default {
   components: {
-    RescueBlock,
-    Title
+    ToRescueBlock,
+    Title,
+    Rescued
   },
   data() {
     return {
       // 数据
-      list: [],
+      rescuedList: [],
+      toRescuedList: [],
       // 加载变量
       listLoading: true,
       // 是否选择
@@ -62,18 +70,6 @@ export default {
           value: 'END',
           label: '结束'
         }
-      ],
-      color: [
-        'linear-gradient(to bottom right, #74C58D,#549227)',
-        'linear-gradient(to bottom right, rgb(253, 182, 43), rgb(101, 175, 23))',
-        'linear-gradient(to bottom right, rgb(101, 175, 23), rgb(152, 215, 221))',
-        'linear-gradient(to bottom right, rgb(152, 215, 221),rgb(156, 182, 189))',
-        'linear-gradient(to bottom right, rgb(156, 182, 189),rgb(251, 108, 7))',
-        'linear-gradient(to bottom right, #74C58D,#549227)',
-        'linear-gradient(to bottom right, rgb(253, 182, 43), rgb(101, 175, 23))',
-        'linear-gradient(to bottom right, rgb(101, 175, 23), rgb(152, 215, 221))',
-        'linear-gradient(to bottom right, rgb(152, 215, 221),rgb(156, 182, 189))',
-        'linear-gradient(to bottom right, rgb(156, 182, 189),rgb(251, 108, 7))'
       ]
     }
   },
@@ -90,16 +86,32 @@ export default {
         status: 'WAITING'
       }
       getRescueList(search).then(response => {
-        this.list = response.data.records
+        this.toRescuedList = response.data.records
       }).finally(() => {
         this.listLoading = false
       })
+
+      search = {
+        page: 1,
+        pageSize: 8,
+        status: 'END'
+      }
+      getRescueList(search).then(response => {
+        this.rescuedList = response.data.records
+      }).finally(() => {
+        this.listLoading = false
+      })
+
     },
 
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+.main-block {
+  width: calc(100%);
+}
 
 </style>

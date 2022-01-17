@@ -260,7 +260,7 @@
             <el-form-item label="照片">
               <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8089/picture/upload"
+                :action="url"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -296,6 +296,7 @@ export default {
   },
   data() {
     return {
+      url: this.$store.state.settings.url + 'picture/upload',
       //地区数据
       pcaa: pcaa,
       //用户上传头像

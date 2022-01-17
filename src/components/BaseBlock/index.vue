@@ -29,7 +29,7 @@
       </div>
       <div class="base-location base-time">
         <svg-icon class="base-location-svg" icon-class="location"/>
-        <div class="base-address-text base-time-text">
+        <div v-if="item.address != null && item.address != []" class="base-address-text base-time-text">
           {{
             pcaa[86][item.address[0]]
           }}-
@@ -59,6 +59,7 @@ export default {
     }
   },
   created() {
+    console.log(this.item)
   },
   data() {
     return {
@@ -72,12 +73,14 @@ export default {
 
 <style scoped lang="scss">
 .base-block {
+
   width: 15em;
   height: 15em;
   vertical-align: top;
   margin: 10px;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.50);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
+  -5px -5px 15px rgba(0, 0, 0, 0.05);
   display: inline-block;
 
 
@@ -109,6 +112,7 @@ export default {
   }
 
   .base-describes {
+    height: 5.5em;
     -webkit-line-clamp: 4;
     font-size: 10px;
     color: #8c939d;

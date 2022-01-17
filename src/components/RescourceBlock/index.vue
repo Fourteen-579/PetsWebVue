@@ -4,7 +4,7 @@
       {{ item.title }}
     </div>
     <div class="block-item resource-text">
-      {{ item.describes }}
+      {{ item.describes != null && item.describes != '' ? item.describes : '该资源对接暂无描述' }}
     </div>
     <div class="block-item resource-label">
       <el-tag
@@ -77,16 +77,17 @@ export default {
 
 <style scoped lang="scss">
 .resource-block {
-  width: 15em;
+  width: 13em;
   height: 12em;
   vertical-align: top;
-  margin: 10px;
+  margin: calc((100% / 5 - 13em) / 2);
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.50);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
+  -5px -5px 15px rgba(0, 0, 0, 0.05);
   display: inline-block;
 
   .block-item {
-    margin-bottom: 15px;
+    margin-bottom: 13px;
     margin-left: 5px;
   }
 
@@ -104,6 +105,9 @@ export default {
   }
 
   .resource-text {
+    height: 1em;
+    line-height: 1em;
+    font-weight: lighter;
     display: -webkit-box;
     overflow: hidden;
     white-space: normal !important;

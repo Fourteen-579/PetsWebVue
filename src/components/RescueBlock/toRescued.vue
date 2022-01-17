@@ -10,7 +10,7 @@
         fit="fit"></el-image>
       <div v-show="!show" class="rescue-block-main-l-des">
         <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
-          {{ rescueItem.animal.name }}
+          我是{{ rescueItem.animal.name }}
         </div>
         <div class="rescue-block-main-l-name rescue-block-main-l-word">
           请救救我！
@@ -23,7 +23,7 @@
 
     <svg-icon v-if="rescueItem.isEmergency === 'YES'" class="emergency-icon" icon-class="emergency2"/>
 
-    <transition name="el-zoom-in-bottom">
+    <transition name="el-zoom-in-center">
       <div v-show="show">
         <div class="rescue-block-block rescue-block-img">
           <el-image
@@ -183,15 +183,11 @@
 import {pcaa} from 'area-data';
 
 export default {
-  name: "RescueBlock",
+  name: "ToRescueBlock",
   props: {
     rescueItem: {
       type: Object,
       required: true
-    },
-    backgroundColor: {
-      type: String,
-      default: '#6093EA'
     }
   },
   mounted() {
@@ -249,39 +245,38 @@ export default {
 .rescue-block-main {
   //padding: 1em 0em 1em 0em;
 
-  width: 15em;
+  min-width: 15em;
+  max-width: 15em;
   height: 20em;
   vertical-align: top;
-  margin: 1em;
+  margin: calc((100% / 4 - 15em) / 2);
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.50);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
+  -5px -5px 15px rgba(0, 0, 0, 0.05);
   display: inline-block;
   position: relative;
 
   .rescue-block-main-l {
+    color: black;
+    text-shadow: 1.5px 1.5px 3px white;
 
     .main-img {
       position: absolute;
-      width: 7.5em;
+      width: 15em;
       height: 20em;
       z-index: -1;
-
-      -webkit-filter: blur(2px); /* Chrome, Opera */
-      -moz-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
     }
 
     .rescue-block-main-l-des {
+      background-color: rgba(255, 255, 255, 0.70);
       position: absolute;
-      left: 3em;
-      top: 3em;
+      bottom: 0;
+      left: 0;
+      width: 15em;
     }
 
     .rescue-block-main-l-name {
       font-size: 1.5em;
-
-
     }
 
     .rescue-block-main-l-word {

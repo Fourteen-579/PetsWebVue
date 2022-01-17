@@ -219,7 +219,7 @@
             <el-form-item label="救助前照片">
               <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8089/picture/upload"
+                :action="url"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccessbeforRescue"
                 :before-upload="beforeAvatarUpload"
@@ -233,7 +233,7 @@
             <el-form-item label="救助后照片">
               <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8089/picture/upload"
+                :action="url"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccessafterRescue"
                 :before-upload="beforeAvatarUpload"
@@ -249,7 +249,7 @@
             <el-form-item label="领养前照片">
               <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8089/picture/upload"
+                :action="url"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccessbeforAdopt"
                 :before-upload="beforeAvatarUpload"
@@ -263,7 +263,7 @@
             <el-form-item label="领养后照片">
               <el-upload
                 class="avatar-uploader"
-                action="http://localhost:8089/picture/upload"
+                :action="url"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccessafterAdopt"
                 :before-upload="beforeAvatarUpload"
@@ -299,6 +299,7 @@ export default {
   },
   data() {
     return {
+      url: this.$store.state.settings.url + 'picture/upload',
       //地区数据
       pcaa: pcaa,
       // 动物状态选择

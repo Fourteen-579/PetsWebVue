@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'PetsHelping',
 
   /**
    * @type {boolean} true | false
@@ -12,5 +12,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
    */
-  sidebarLogo: false
+  sidebarLogo: false,
+
+  url: 'http://172.18.9.157:8089/'
 }
