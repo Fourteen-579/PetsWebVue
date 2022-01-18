@@ -3,6 +3,10 @@
     <div class="first border">
       <svg-icon icon-class="module" class="first-icon"></svg-icon>
     </div>
+    <div v-if="backLink" class="back border">
+      <router-link :to="backLink" class="back-link">{{ backLinkName }}</router-link>
+      <svg-icon icon-class="toRight2" class="back-link-svg"/>
+    </div>
     <div class="text border">
       {{ titleName }}
     </div>
@@ -33,6 +37,13 @@ export default {
     linkName: {
       type: String,
       default: '更多'
+    },
+    backLink: {
+      type: String
+    },
+    backLinkName: {
+      type: String,
+      default: '上一页'
     }
   },
 }
@@ -40,6 +51,18 @@ export default {
 
 <style scoped lang="scss">
 .little-title {
+
+  .back{
+    .back-link{
+      font-size: 20px;
+      color: black;
+    }
+
+    .back-link-svg{
+      width: 15px;
+      height: 15px;
+    }
+  }
 
   .first {
     .first-icon {
