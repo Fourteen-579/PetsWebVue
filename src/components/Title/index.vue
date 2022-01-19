@@ -7,7 +7,7 @@
       <router-link :to="backLink" class="back-link">{{ backLinkName }}</router-link>
       <svg-icon icon-class="toRight2" class="back-link-svg"/>
     </div>
-    <div class="text border">
+    <div :class="{'text':backLink==null,'border':true,'back-title':backLink!=null} ">
       {{ titleName }}
     </div>
     <div v-if="description" class="text-small border">
@@ -52,13 +52,13 @@ export default {
 <style scoped lang="scss">
 .little-title {
 
-  .back{
-    .back-link{
+  .back {
+    .back-link {
       font-size: 20px;
       color: black;
     }
 
-    .back-link-svg{
+    .back-link-svg {
       width: 15px;
       height: 15px;
     }
@@ -69,6 +69,10 @@ export default {
       width: 20px;
       height: 20px;
     }
+  }
+
+  .back-title {
+    font-size: 15px;
   }
 
   .text {

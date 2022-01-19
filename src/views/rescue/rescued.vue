@@ -1,7 +1,18 @@
 <template>
   <div class="app-container">
     <div class="to-rescued-main">
-      <Title title-name="已救助动物" description="被救助的他们非常感谢人类的帮助!" back-link="/" back-link-name="救助信息"/>
+      <Title title-name="已救助动物" description="被救助的他们非常感谢人类的帮助!" back-link="/rescue/rescue" back-link-name="救助信息"/>
+      <!--      <div class="to-rescued-main-search">-->
+      <!--        <el-input-->
+      <!--          placeholder="请输入需要搜索内容（动物昵称、动物种类）"-->
+      <!--          :maxlength="10"-->
+      <!--          show-word-limit="true"-->
+      <!--          clearable-->
+      <!--          @change="fetchData"-->
+      <!--          prefix-icon="el-icon-search"-->
+      <!--          v-model="input">-->
+      <!--        </el-input>-->
+      <!--      </div>-->
       <div class="infinite-list-wrapper" style="overflow:auto">
         <ul
           class="list"
@@ -42,7 +53,7 @@ export default {
   },
   computed: {
     noMore() {
-      return this.pageSizes >= 20 || (this.total != null && this.pageSizes > this.total)
+      return this.pageSizes >= 21 || (this.total != null && this.pageSizes > this.total)
     },
     disabled() {
       return this.listLoading || this.noMore
@@ -50,6 +61,7 @@ export default {
   },
   data() {
     return {
+      // input: '',
       // 数据
       rescuedList: [],
       total: null,
@@ -73,7 +85,8 @@ export default {
       let search = {
         page: 1,
         pageSize: _that.pageSizes,
-        status: 'END'
+        status: 'END',
+        // searchValue: _that.input
       }
       getRescueList(search).then(response => {
         this.rescuedList = response.data.records

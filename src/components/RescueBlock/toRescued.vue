@@ -9,28 +9,21 @@
         :src="rescueItem.animal.beforRescuePhoto"
         fit="fit"></el-image>
       <div v-show="!show" class="rescue-block-main-l-des">
-        <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
-          我是{{ rescueItem.animal.name }}
-        </div>
-        <div class="rescue-block-main-l-name rescue-block-main-l-word">
-          请救救我！
-        </div>
-        <div class="rescue-block-main-l-name rescue-block-main-l-text">
-          {{ rescueItem.findSituation }}
+        <div class="rescue-block-main-l-des-word">
+          <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
+            我是{{ rescueItem.animal.name }}
+          </div>
+          <div class="rescue-block-main-l-name rescue-block-main-l-text">
+            {{ rescueItem.findSituation }}
+          </div>
         </div>
       </div>
     </div>
 
     <svg-icon v-if="rescueItem.isEmergency === 'YES'" class="emergency-icon" icon-class="emergency2"/>
 
-    <transition name="el-zoom-in-center">
+    <transition name="el-fade-in-linear">
       <div v-show="show">
-        <div class="rescue-block-block rescue-block-img">
-          <el-image
-            class="rescue-block-img-img"
-            :src="rescueItem.animal.beforRescuePhoto"
-            fit="fit"></el-image>
-        </div>
         <div class="rescue-block-main-body transition-box">
           <el-tabs type="card" class="rescue-block-tabs">
             <el-tab-pane label="动物信息">
@@ -42,6 +35,18 @@
                   <div class="rescue-block-animal-info-word">
                     {{ rescueItem.animal.name }}
                   </div>
+                  <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
+                      sexOptions.find(function (value) {
+                        return value.value === rescueItem.animal.sex;
+                      }).label
+                    }}
+                  </svg-icon>
+                  <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
+                      sexOptions.find(function (value) {
+                        return value.value === rescueItem.animal.sex;
+                      }).label
+                    }}
+                  </svg-icon>
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-animal-info-type">
@@ -95,26 +100,6 @@
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-label">
-                    性别：
-                  </div>
-                  <div class="rescue-block-animal-info-word">
-                    <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
-                        sexOptions.find(function (value) {
-                          return value.value === rescueItem.animal.sex;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
-                        sexOptions.find(function (value) {
-                          return value.value === rescueItem.animal.sex;
-                        }).label
-                      }}
-                    </svg-icon>
-                  </div>
-
-                </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
                     发布人：
                   </div>
                   <div class="rescue-block-animal-info-word">
@@ -147,6 +132,9 @@
                     {{ $moment(rescueItem.createTime).format('YYYY-MM-DD') }}
                   </div>
                 </div>
+                <div class="rescue-block-block rescue-block-button">
+                  <el-button type="success" plain size="mini" round>我要救助它！</el-button>
+                </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="详细信息">
@@ -170,9 +158,6 @@
               </div>
             </el-tab-pane>
           </el-tabs>
-          <div class="rescue-block-block rescue-block-button">
-            <el-button type="success" plain size="mini" round>我要救助它！</el-button>
-          </div>
         </div>
       </div>
     </transition>
@@ -245,11 +230,11 @@ export default {
 .rescue-block-main {
   //padding: 1em 0em 1em 0em;
 
-  min-width: 15em;
-  max-width: 15em;
-  height: 20em;
+  min-width: 20em;
+  max-width: 20em;
+  height: 12.36em;
   vertical-align: top;
-  margin: calc((100% / 4 - 15em) / 2);
+  margin: 1em calc((100% / 3 - 20em) / 2);
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
   -5px -5px 15px rgba(0, 0, 0, 0.05);
@@ -257,43 +242,42 @@ export default {
   position: relative;
 
   .rescue-block-main-l {
-    color: black;
-    text-shadow: 1.5px 1.5px 3px white;
+    color: white;
 
     .main-img {
       position: absolute;
-      width: 15em;
-      height: 20em;
+      width: 20em;
+      height: 12.36em;
       z-index: -1;
     }
 
     .rescue-block-main-l-des {
-      background-color: rgba(255, 255, 255, 0.70);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 15em;
-    }
+      height: 12.36em;
+      background-color: rgba(0, 0, 0, 0.20);
+      text-align: center;
+      width: 100%;
 
-    .rescue-block-main-l-name {
-      font-size: 1.5em;
-    }
+      .rescue-block-main-l-des-word {
+        padding: 4em 1em 0em 1em;
 
-    .rescue-block-main-l-word {
-      font-size: 1.5em;
-    }
+        .rescue-block-main-l-name {
+          font-size: 1.5em;
+        }
 
-    .rescue-block-main-l-text {
-      width: 12em;
-      display: -webkit-box;
-      overflow: hidden;
-      white-space: normal !important;
-      text-overflow: ellipsis;
-      word-wrap: break-word;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      font-size: 1em;
-      margin-top: 1em;
+        .rescue-block-main-l-text {
+          display: -webkit-box;
+          overflow: hidden;
+          white-space: normal !important;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          font-size: 1em;
+          margin-top: 0.5em;
+        }
+      }
+
+
     }
   }
 
@@ -308,14 +292,13 @@ export default {
 
   .rescue-block-main-body {
     background-color: #ffffff;
-    border-radius: 1em 1em 0em 0em;
-    height: 16em;
-    padding-top: 1em;
+    height: 12.36em;
+    width: 20em;
+    overflow: hidden;
     color: #3A4525;
-    vertical-align: bottom;
+    padding-top: 1em;
 
     .rescue-block-tabs {
-
 
       .rescue-block-label {
         display: inline-flex;
@@ -328,12 +311,24 @@ export default {
 
       .rescue-block-animal-info {
         font-size: 15px;
-        height: 11.5em;
-
+        line-height: 17px;
+        height: 100%;
 
         .rescue-block-animal-info-text {
-          margin-bottom: 0.5em;
+          margin-bottom: 0.3em;
           position: relative;
+
+          .rescue-block-animal-location {
+            height: 34px;
+            display: -webkit-box;
+            overflow: hidden;
+            white-space: normal !important;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-top: 0.3em;
+          }
 
           .rescue-block-animal-info-type {
             position: absolute;
@@ -346,17 +341,6 @@ export default {
             }
           }
 
-          .rescue-block-animal-location {
-            display: -webkit-box;
-            overflow: hidden;
-            white-space: normal !important;
-            text-overflow: ellipsis;
-            word-wrap: break-word;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            margin-top: 0.5em;
-          }
-
           .rescue-block-animal-info-word {
             display: inline-flex;
           }
@@ -367,10 +351,11 @@ export default {
 
       .rescue-block-rescue-info {
         font-size: 12px;
-        height: 14.5em;
+        height: 100%;
 
         .rescue-block-rescue-info-text {
           margin-bottom: 0.5em;
+          height: 5.5em;
 
           .rescue-block-rescue-info-word {
             text-indent: 24px;
@@ -379,7 +364,7 @@ export default {
             white-space: normal !important;
             text-overflow: ellipsis;
             word-wrap: break-word;
-            -webkit-line-clamp: 5;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
           }
 
@@ -412,6 +397,10 @@ export default {
 </style>
 
 <style>
+.el-tabs__header {
+  margin: 0 0 10px;
+}
+
 .el-tabs__item {
   height: 1em;
   line-height: 1em;

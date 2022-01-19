@@ -4,43 +4,26 @@
        @mouseleave="show = false"
   >
     <div class="rescue-block-main-l">
+      <!-- TODO 尝试加一个黑色蒙版-->
       <el-image
         class="main-img"
         :src="rescueItem.animal.afterRescuePhoto"
         fit="fit"></el-image>
       <div v-show="!show" class="rescue-block-main-l-des">
-        <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
-          我是{{ rescueItem.animal.name }}
+        <div class="rescue-block-main-l-des-word">
+          <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
+            我是{{ rescueItem.animal.name }}
+          </div>
+          <div class="rescue-block-main-l-name rescue-block-main-l-text">
+            {{ rescueItem.process }}
+          </div>
         </div>
-        <div class="rescue-block-main-l-name rescue-block-main-l-word">
-          谢谢好心人的救助！
-        </div>
-        <div class="rescue-block-main-l-name rescue-block-main-l-text">
-          {{ rescueItem.process }}
-        </div>
+
       </div>
     </div>
 
     <transition name="el-zoom-in-center">
       <div v-show="show">
-        <div class="rescue-block-block rescue-block-img">
-          <div class="rescue-block-img-block">
-            <el-image
-              class="rescue-block-img-img"
-              :src="rescueItem.animal.beforRescuePhoto"
-              fit="fit"></el-image>
-          </div>
-          <div class="rescue-block-img-block">
-            <svg-icon class="rescue-block-img-svg-svg" icon-class="toRight"/>
-          </div>
-          <div class="rescue-block-img-block">
-            <el-image
-              class="rescue-block-img-img"
-              :src="rescueItem.animal.afterRescuePhoto"
-              fit="fit"></el-image>
-          </div>
-
-        </div>
         <div class="rescue-block-main-body transition-box">
           <el-tabs type="card" class="rescue-block-tabs">
             <el-tab-pane label="动物信息">
@@ -52,6 +35,18 @@
                   <div class="rescue-block-animal-info-word">
                     {{ rescueItem.animal.name }}
                   </div>
+                  <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
+                      sexOptions.find(function (value) {
+                        return value.value === rescueItem.animal.sex;
+                      }).label
+                    }}
+                  </svg-icon>
+                  <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
+                      sexOptions.find(function (value) {
+                        return value.value === rescueItem.animal.sex;
+                      }).label
+                    }}
+                  </svg-icon>
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-animal-info-type">
@@ -105,26 +100,6 @@
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-label">
-                    性别：
-                  </div>
-                  <div class="rescue-block-animal-info-word">
-                    <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
-                        sexOptions.find(function (value) {
-                          return value.value === rescueItem.animal.sex;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
-                        sexOptions.find(function (value) {
-                          return value.value === rescueItem.animal.sex;
-                        }).label
-                      }}
-                    </svg-icon>
-                  </div>
-
-                </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
                     发布人:
                   </div>
                   <div class="rescue-block-animal-info-word">
@@ -138,23 +113,6 @@
                   <div class="rescue-block-animal-info-word">
                     {{ rescueItem.rescueUserName }}
                   </div>
-                </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
-                    所在地：
-                  </div>
-                  <div class="rescue-block-animal-location">
-                    {{
-                      pcaa[86][rescueItem.animal.location[0]]
-                    }}-
-                    {{
-                      pcaa[rescueItem.animal.location[0]][rescueItem.animal.location[1]]
-                    }}-
-                    {{
-                      pcaa[rescueItem.animal.location[1]][rescueItem.animal.location[2]]
-                    }}
-                  </div>
-
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-label">
@@ -188,8 +146,12 @@
               </div>
             </el-tab-pane>
           </el-tabs>
-          <div class="rescue-block-block rescue-block-button" v-if="rescueItem.animal.status==='TOBEADOPTED'">
-            <el-button type="success" plain size="mini" round>我要领养它！</el-button>
+          <div @mouseover="svgClass = 'adopt2'"
+               @mouseleave="svgClass = 'adopt2hover'"
+               class="rescue-block-block rescue-block-button"
+               v-if="rescueItem.animal.status === 'TOBEADOPTED'"
+               title="点击领养">
+            <svg-icon class="rescue-block-button-svg" :icon-class="svgClass"/>
           </div>
         </div>
       </div>
@@ -213,6 +175,7 @@ export default {
   },
   data() {
     return {
+      svgClass: 'adopt2hover',
       show: false,
       pcaa: pcaa,
       // 动物种类选择
@@ -262,7 +225,7 @@ export default {
 .rescue-block-main {
 
   width: 20em;
-  height: 25em;
+  height: 12.36em;
   vertical-align: top;
   margin: calc((100% / 3 - 20em) / 2);
   border-radius: 10px;
@@ -272,58 +235,52 @@ export default {
   position: relative;
 
   .rescue-block-main-l {
-    color: black;
-    text-shadow: 1.5px 1.5px 3px white;
+    color: white;
 
     .main-img {
       position: absolute;
       width: 20em;
-      height: 25em;
+      height: 12.36em;
       z-index: -1;
-
-      //-webkit-filter: blur(2px); /* Chrome, Opera */
-      //-moz-filter: blur(2px);
-      //-ms-filter: blur(2px);
-      //filter: blur(2px);
     }
 
     .rescue-block-main-l-des {
-      background-color: rgba(255, 255, 255, 0.70);
-      position: absolute;
-      left: 0;
-      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.20);
+      text-align: center;
       width: 100%;
+      height: 12.36em;
+
+      .rescue-block-main-l-des-word {
+
+        padding: 4em 1em 0em 1em;
+
+        .rescue-block-main-l-name {
+          font-size: 1.5em;
+        }
+
+        .rescue-block-main-l-text {
+          display: -webkit-box;
+          overflow: hidden;
+          white-space: normal !important;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          font-size: 1em;
+          margin-top: 0.5em;
+        }
+      }
+
+
     }
 
-    .rescue-block-main-l-name {
-      font-size: 1.5em;
-    }
-
-    .rescue-block-main-l-word {
-      font-size: 1.5em;
-    }
-
-    .rescue-block-main-l-text {
-      height: 8em;
-      width: 100%;
-      display: -webkit-box;
-      overflow: hidden;
-      white-space: normal !important;
-      text-overflow: ellipsis;
-      word-wrap: break-word;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      font-size: 1em;
-      margin-top: 1em;
-    }
 
   }
 
 
   .rescue-block-main-body {
     background-color: #ffffff;
-    border-radius: 1em 1em 0em 0em;
-    height: 21em;
+    height: 12.36em;
     padding-top: 1em;
     color: #3A4525;
     vertical-align: bottom;
@@ -342,8 +299,7 @@ export default {
 
       .rescue-block-animal-info {
         font-size: 1em;
-        height: 16em;
-
+        height: 100%;
 
         .rescue-block-animal-info-text {
           margin-bottom: 1em;
@@ -361,84 +317,50 @@ export default {
 
           }
 
-          .rescue-block-animal-location {
-            display: inline-flex;
-            overflow: hidden;
-            white-space: normal !important;
-            text-overflow: ellipsis;
-            word-wrap: break-word;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          }
-
           .rescue-block-animal-info-word {
             display: inline-flex;
           }
 
         }
 
-
       }
 
       .rescue-block-rescue-info {
-        font-size: 1em;
-        height: 16em;
+        font-size: 0.8em;
+        height: 100%;
+        overflow-y: visible;
 
         .rescue-block-rescue-info-text {
-          margin-bottom: 0.5em;
-          height: 8em;
+          margin-bottom: 0.1em;
+          height: 5em;
 
           .rescue-block-rescue-info-word {
-            text-indent: 24px;
+            text-indent: 2em;
             display: -webkit-box;
             overflow: hidden;
             white-space: normal !important;
             text-overflow: ellipsis;
             word-wrap: break-word;
-            -webkit-line-clamp: 5;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
           }
         }
-
-        .rescue-block-rescue-info-user {
-          height: 2.5em;
-          margin-right: 2em;
-          display: inline-block;
-          margin-bottom: 0.5em;
-        }
       }
     }
 
-  }
-
-  .rescue-block-img {
-    text-align: center;
-
-    .rescue-block-img-block {
-      width: 4em;
-      height: 4em;
-      display: inline-block;
-      vertical-align: bottom;
-
-      .rescue-block-img-svg-svg {
-        width: 2em;
-        height: 4em;
-        vertical-align: center;
-      }
-
-      .rescue-block-img-img {
-        width: 4em;
-        height: 4em;
-        border-radius: 50%;
-        display: inline-block;
-      }
-    }
   }
 
   .rescue-block-button {
-    height: 2em;
-    text-align: center;
-    vertical-align: bottom;
+    position: absolute;
+    right: 1em;
+    bottom: 0.5em;
+    z-index: 100;
+
+    .rescue-block-button-svg {
+      width: 3em;
+      height: 3em;
+    }
+
   }
 
 }
