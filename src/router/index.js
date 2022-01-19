@@ -44,6 +44,30 @@ export const constantRoutes = [
   },
 
   {
+    path: '/adopted',
+    component: Layout,
+    redirect: '/adopted',
+    children: [{
+      path: 'adopted',
+      name: 'adopted',
+      component: () => import('@/views/adopt/adopted'),
+    }],
+    hidden: true
+  },
+
+  {
+    path: '/toAdopted',
+    component: Layout,
+    redirect: '/toAdopted',
+    children: [{
+      path: 'toAdopted',
+      name: 'toAdopted',
+      component: () => import('@/views/adopt/toAdopted'),
+    }],
+    hidden: true
+  },
+
+  {
     path: '/rescued',
     component: Layout,
     redirect: '/rescued',

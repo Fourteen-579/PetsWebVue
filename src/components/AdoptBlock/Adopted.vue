@@ -1,20 +1,20 @@
 <template>
-  <div class="rescue-block-main"
+  <div class="adopt-block-main"
        @mouseover="show = true"
        @mouseleave="show = false"
   >
-    <div class="rescue-block-main-l">
+    <div class="adopt-block-main-l">
       <el-image
         class="main-img"
-        :src="rescueItem.animal.afterRescuePhoto"
+        :src="adoptItem.animal.afterAdoptPhoto"
         fit="fit"></el-image>
-      <div v-show="!show" class="rescue-block-main-l-des">
-        <div class="rescue-block-main-l-des-word">
-          <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
-            我是{{ rescueItem.animal.name }}
+      <div v-show="!show" class="adopt-block-main-l-des">
+        <div class="adopt-block-main-l-des-word">
+          <div class="adopt-block-main-l-name" v-if="adoptItem.animal.name">
+            我是{{ adoptItem.animal.name }}
           </div>
-          <div class="rescue-block-main-l-name rescue-block-main-l-text">
-            {{ rescueItem.process }}
+          <div class="adopt-block-main-l-name adopt-block-main-l-text">
+            {{ adoptItem.process }}
           </div>
         </div>
 
@@ -23,135 +23,128 @@
 
     <transition name="el-zoom-in-center">
       <div v-show="show">
-        <div class="rescue-block-main-body transition-box">
-          <el-tabs type="card" class="rescue-block-tabs">
+        <div class="adopt-block-main-body transition-box">
+          <el-tabs type="card" class="adopt-block-tabs">
             <el-tab-pane label="动物信息">
-              <div class="rescue-block-block rescue-block-animal-info">
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
+              <div class="adopt-block-block adopt-block-animal-info">
+                <div class="adopt-block-animal-info-text">
+                  <div class="adopt-block-label">
                     昵称：
                   </div>
-                  <div class="rescue-block-animal-info-word">
-                    {{ rescueItem.animal.name }}
+                  <div class="adopt-block-animal-info-word">
+                    {{ adoptItem.animal.name }}
                   </div>
-                  <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
+                  <svg-icon v-if="adoptItem.animal.sex === 'WOMAN'" icon-class="woman">{{
                       sexOptions.find(function (value) {
-                        return value.value === rescueItem.animal.sex;
+                        return value.value === adoptItem.animal.sex;
                       }).label
                     }}
                   </svg-icon>
-                  <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
+                  <svg-icon v-if="adoptItem.animal.sex === 'MAN'" icon-class="man">{{
                       sexOptions.find(function (value) {
-                        return value.value === rescueItem.animal.sex;
+                        return value.value === adoptItem.animal.sex;
                       }).label
                     }}
                   </svg-icon>
                 </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-animal-info-type">
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'SNACK'"
+                <div class="adopt-block-animal-info-text">
+                  <div class="adopt-block-animal-info-type">
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'SNACK'"
                               icon-class="snack">
                       {{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'HAMSTER'"
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'HAMSTER'"
                               icon-class="hamster">{{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'RABBIT'"
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'RABBIT'"
                               icon-class="rabbit">
                       {{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'DOG'"
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'DOG'"
                               icon-class="dog">{{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'CAT'"
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'CAT'"
                               icon-class="cat">{{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'OTHER'"
+                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'OTHER'"
                               icon-class="other">
                       {{
                         typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
+                          return value.value === adoptItem.animal.type;
                         }).label
                       }}
                     </svg-icon>
 
                   </div>
                 </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
+                <div class="adopt-block-animal-info-text">
+                  <div class="adopt-block-label">
                     发布人:
                   </div>
-                  <div class="rescue-block-animal-info-word">
-                    {{ rescueItem.findUserName }}
+                  <div class="adopt-block-animal-info-word">
+                    {{ adoptItem.publisherName }}
                   </div>
                 </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
-                    救助人:
+                <div class="adopt-block-animal-info-text">
+                  <div class="adopt-block-label">
+                    领养人:
                   </div>
-                  <div class="rescue-block-animal-info-word">
-                    {{ rescueItem.rescueUserName }}
+                  <div class="adopt-block-animal-info-word">
+                    {{ adoptItem.adoptUserName }}
                   </div>
                 </div>
-                <div class="rescue-block-animal-info-text">
-                  <div class="rescue-block-label">
-                    救助时间：
+                <div class="adopt-block-animal-info-text">
+                  <div class="adopt-block-label">
+                    领养时间：
                   </div>
-                  <div class="rescue-block-animal-info-word">
-                    {{ $moment(rescueItem.rescueTime).format('YYYY-MM-DD') }}
+                  <div class="adopt-block-animal-info-word">
+                    {{ $moment(adoptItem.adoptTime).format('YYYY-MM-DD') }}
                   </div>
                 </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="详细信息">
-              <div class="rescue-block-block rescue-block-rescue-info">
+              <div class="adopt-block-block adopt-block-adopt-info">
 
-                <div class="rescue-block-rescue-info-text">
-                  <div class="rescue-block-label">
-                    救助过程:
+                <div class="adopt-block-adopt-info-text">
+                  <div class="adopt-block-label">
+                    领养过程:
                   </div>
-                  <div class="rescue-block-rescue-info-word">
-                    {{ rescueItem.process }}
+                  <div class="adopt-block-adopt-info-word">
+                    {{ adoptItem.process }}
                   </div>
                 </div>
-                <div class="rescue-block-rescue-info-text">
-                  <div class="rescue-block-label">
+                <div class="adopt-block-adopt-info-text">
+                  <div class="adopt-block-label">
                     现在的情况：
                   </div>
-                  <div class="rescue-block-rescue-info-word">
-                    {{ rescueItem.afterSituation }}
+                  <div class="adopt-block-adopt-info-word">
+                    {{ adoptItem.afterSituation }}
                   </div>
                 </div>
               </div>
             </el-tab-pane>
           </el-tabs>
-          <div @mouseover="svgClass = 'adopt2'"
-               @mouseleave="svgClass = 'adopt2hover'"
-               class="rescue-block-block rescue-block-button"
-               v-if="rescueItem.animal.status === 'TOBEADOPTED'"
-               title="点击领养">
-            <svg-icon class="rescue-block-button-svg" :icon-class="svgClass"/>
-          </div>
         </div>
       </div>
     </transition>
@@ -162,9 +155,9 @@
 import {pcaa} from 'area-data';
 
 export default {
-  name: "Rescued",
+  name: "AdoptedBlock",
   props: {
-    rescueItem: {
+    adoptItem: {
       type: Object,
       required: true
     }
@@ -174,7 +167,6 @@ export default {
   },
   data() {
     return {
-      svgClass: 'adopt2hover',
       show: false,
       pcaa: pcaa,
       // 动物种类选择
@@ -221,7 +213,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.rescue-block-main {
+.adopt-block-main {
 
   width: 20em;
   height: 12.36em;
@@ -233,7 +225,7 @@ export default {
   display: inline-block;
   position: relative;
 
-  .rescue-block-main-l {
+  .adopt-block-main-l {
     color: white;
 
     .main-img {
@@ -243,21 +235,21 @@ export default {
       z-index: -1;
     }
 
-    .rescue-block-main-l-des {
+    .adopt-block-main-l-des {
       background-color: rgba(0, 0, 0, 0.20);
       text-align: center;
       width: 100%;
       height: 12.36em;
 
-      .rescue-block-main-l-des-word {
+      .adopt-block-main-l-des-word {
 
         padding: 4em 1em 0em 1em;
 
-        .rescue-block-main-l-name {
+        .adopt-block-main-l-name {
           font-size: 1.5em;
         }
 
-        .rescue-block-main-l-text {
+        .adopt-block-main-l-text {
           display: -webkit-box;
           overflow: hidden;
           white-space: normal !important;
@@ -277,46 +269,46 @@ export default {
   }
 
 
-  .rescue-block-main-body {
+  .adopt-block-main-body {
     background-color: #ffffff;
     height: 12.36em;
     padding-top: 1em;
     color: #3A4525;
     vertical-align: bottom;
 
-    .rescue-block-tabs {
+    .adopt-block-tabs {
 
 
-      .rescue-block-label {
+      .adopt-block-label {
         display: inline-flex;
       }
 
-      .rescue-block-block {
+      .adopt-block-block {
         padding: 0 1em 0 1em;
 
       }
 
-      .rescue-block-animal-info {
+      .adopt-block-animal-info {
         font-size: 1em;
         height: 100%;
 
-        .rescue-block-animal-info-text {
+        .adopt-block-animal-info-text {
           margin-bottom: 1em;
           position: relative;
 
-          .rescue-block-animal-info-type {
+          .adopt-block-animal-info-type {
             position: absolute;
             right: 1em;
             top: -2em;
 
-            .rescue-block-animal-info-type-svg {
+            .adopt-block-animal-info-type-svg {
               width: 3em;
               height: 3em;
             }
 
           }
 
-          .rescue-block-animal-info-word {
+          .adopt-block-animal-info-word {
             display: inline-flex;
           }
 
@@ -324,16 +316,16 @@ export default {
 
       }
 
-      .rescue-block-rescue-info {
+      .adopt-block-adopt-info {
         font-size: 0.8em;
         height: 100%;
         overflow-y: visible;
 
-        .rescue-block-rescue-info-text {
+        .adopt-block-adopt-info-text {
           margin-bottom: 0.1em;
           height: 5em;
 
-          .rescue-block-rescue-info-word {
+          .adopt-block-adopt-info-word {
             text-indent: 2em;
             display: -webkit-box;
             overflow: hidden;
@@ -349,13 +341,13 @@ export default {
 
   }
 
-  .rescue-block-button {
+  .adopt-block-button {
     position: absolute;
     right: 1em;
     bottom: 0.5em;
     z-index: 100;
 
-    .rescue-block-button-svg {
+    .adopt-block-button-svg {
       width: 3em;
       height: 3em;
     }

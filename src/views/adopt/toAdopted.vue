@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <div class="to-rescued-main">
-      <Title title-name="已救助动物" description="被救助的他们非常感谢人类的帮助!" back-link="/rescue/rescue" back-link-name="救助信息"/>
+    <div class="to-adopted-main">
+      <Title title-name="待领养动物" description="请帮帮这些动物!" back-link="/adopt/adopt" back-link-name="领养信息"/>
       <div class="infinite-list-wrapper" style="overflow:auto">
         <ul
           class="list"
@@ -9,7 +9,7 @@
           :infinite-scroll-distance="250"
           :infinite-scroll-immediate="false"
           infinite-scroll-disabled="disabled">
-          <rescueBlock :rescue-item="item" v-for="item in rescuedList"/>
+          <ToAdoptedBlock :adopt-item="item" v-for="item in toAdoptedList"/>
         </ul>
         <div class="notice">
           <svg-icon icon-class="noMore" class="notice-svg"/>
@@ -24,20 +24,20 @@
 </template>
 
 <script>
-import rescueBlock from "@/components/RescueBlock/Rescued"
-import {getRescueList} from "@/api/resuce";
+import ToAdoptedBlock from "@/components/AdoptBlock/toAdopted"
+import {getAdoptList} from "@/api/adopt";
 import Title from "@/components/Title/index"
 
 export default {
-  name: "toRescued",
+  name: "toAdopted",
   components: {
-    rescueBlock,
+    ToAdoptedBlock,
     Title
   },
   props: {
     pageSize: {
       type: Number,
-      default: 6
+      default: 8
     }
   },
   computed: {
@@ -50,9 +50,8 @@ export default {
   },
   data() {
     return {
-      // input: '',
       // 数据
-      rescuedList: [],
+      toAdoptedList: [],
       total: null,
       // 加载变量
       listLoading: false,
@@ -64,7 +63,7 @@ export default {
   },
   methods: {
     load() {
-      this.pageSizes += 3
+      this.pageSizes += 4
       this.fetchData()
     },
     // 获取数据
@@ -74,11 +73,10 @@ export default {
       let search = {
         page: 1,
         pageSize: _that.pageSizes,
-        status: 'END',
-        // searchValue: _that.input
+        status: 'WAITING'
       }
-      getRescueList(search).then(response => {
-        this.rescuedList = response.data.records
+      getAdoptList(search).then(response => {
+        this.toAdoptedList = response.data.records
         this.total = response.data.total
       }).finally(() => {
         this.listLoading = false
@@ -93,7 +91,7 @@ export default {
   width: 0;
 }
 
-.to-rescued-main {
+.to-adopted-main {
   width: calc(100%);
 
 
@@ -129,5 +127,8 @@ export default {
   }
 }
 
+
+</style>
+<style>
 
 </style>

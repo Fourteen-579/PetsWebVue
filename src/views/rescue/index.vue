@@ -41,7 +41,7 @@ export default {
       this.listLoading = true
       let search = {
         page: 1,
-        pageSize: 8,
+        pageSize: 6,
         status: 'WAITING'
       }
       getRescueList(search).then(response => {
@@ -52,7 +52,7 @@ export default {
 
       search = {
         page: 1,
-        pageSize: 8,
+        pageSize: 6,
         status: 'END'
       }
       getRescueList(search).then(response => {

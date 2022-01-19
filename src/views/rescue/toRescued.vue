@@ -2,7 +2,6 @@
   <div class="app-container">
     <div class="to-rescued-main">
       <Title title-name="待救助动物" description="请帮帮这些动物!" back-link="/rescue/rescue" back-link-name="救助信息"/>
-      <!--      TODO 搜索框-->
       <div class="infinite-list-wrapper" style="overflow:auto">
         <ul
           class="list"
@@ -64,8 +63,6 @@ export default {
   },
   methods: {
     load() {
-      console.log(11111)
-      setTimeout(null, 10000);
       this.pageSizes += 4
       this.fetchData()
     },
