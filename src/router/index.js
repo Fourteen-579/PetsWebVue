@@ -92,6 +92,30 @@ export const constantRoutes = [
   },
 
   {
+    path: '/donate',
+    component: Layout,
+    redirect: '/donate',
+    children: [{
+      path: 'donate',
+      name: 'donate',
+      component: () => import('@/views/resource/donate'),
+    }],
+    hidden: true
+  },
+
+  {
+    path: '/demand',
+    component: Layout,
+    redirect: '/demand',
+    children: [{
+      path: 'demand',
+      name: 'demand',
+      component: () => import('@/views/resource/demand'),
+    }],
+    hidden: true
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -129,6 +153,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/resource',
     component: Layout,
@@ -142,6 +167,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/propaganda',
     component: Layout,
@@ -155,46 +181,7 @@ export const constantRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/animal',
-  //   component: Layout,
-  //   redirect: '/animal',
-  //   children: [
-  //     {
-  //       path: 'animal',
-  //       name: 'Animal',
-  //       component: () => import('@/views/animal/index'),
-  //       meta: {title: '动物信息', icon: 'animal'}
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/user',
-  //   component: Layout,
-  //   redirect: '/user',
-  //   children: [
-  //     {
-  //       path: 'user',
-  //       name: 'User',
-  //       component: () => import('@/views/user/index'),
-  //       meta: {title: '用户信息', icon: 'user2'}
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/label',
-  //   component: Layout,
-  //   redirect: '/label',
-  //   children: [
-  //     {
-  //       path: 'label',
-  //       name: 'Label',
-  //       component: () => import('@/views/label/index'),
-  //       meta: {title: '标签信息', icon: 'label'}
-  //     }
-  //   ]
-  // },
-  // 外连接样式书写
+
   /*  {
     path: 'external-link',
     component: Layout,

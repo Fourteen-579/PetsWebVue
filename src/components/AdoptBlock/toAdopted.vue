@@ -129,6 +129,9 @@
                     {{ $moment(adoptItem.createTime).format('YYYY-MM-DD') }}
                   </div>
                 </div>
+                <div class="adopt-block-block adopt-block-button">
+                  <el-button type="success" plain size="mini" round>我要领养它！</el-button>
+                </div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="详细信息">
