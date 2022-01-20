@@ -77,17 +77,17 @@ export default {
 
 <style scoped lang="scss">
 .resource-block {
-  width: 13em;
-  height: 12em;
+  width: 16.1em;
+  height: 11em;
   vertical-align: top;
-  margin: calc((100% / 5 - 13em) / 2);
+  margin: 0.5em calc((100% - 16.1em * 4) / (4 * 2));
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
   -5px -5px 15px rgba(0, 0, 0, 0.05);
   display: inline-block;
 
   .block-item {
-    margin-bottom: 13px;
+    margin-bottom: 0.5em;
     margin-left: 5px;
   }
 
@@ -120,6 +120,7 @@ export default {
 
   .resource-time-location {
     display: inline-flex;
+    height: 30px;
 
     .resource-time-svg {
       width: 15px;

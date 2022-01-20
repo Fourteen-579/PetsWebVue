@@ -120,7 +120,7 @@ export default {
       this.listLoading = true;
       let param = {
         page: 1,
-        pageSize: 5,
+        pageSize: 4,
         status: 'WAITING',
       }
       getResourceList(param).then((res) => {

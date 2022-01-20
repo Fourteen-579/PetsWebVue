@@ -218,7 +218,7 @@ export default {
   width: 20em;
   height: 12.36em;
   vertical-align: top;
-  margin: calc((100% / 3 - 20em) / 2);
+  margin: 1em calc((100% - 20em * 3) / (3 * 2));
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
   -5px -5px 15px rgba(0, 0, 0, 0.05);
