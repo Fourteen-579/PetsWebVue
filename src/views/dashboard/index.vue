@@ -33,6 +33,20 @@
       <BaseBlock v-for="item in baseItem" :item="item"/>
     </div>
 
+    <div class="our-work-for module">
+      <Title title-name="我们的工作" description="我们都在做些什么"/>
+      <div class="work-block">
+        <OurWork :svg-name="item.svgName" :img-url="item.imgUrl" :description="item.description" :title="item.title"
+                 v-for="item in ourwork"/>
+      </div>
+    </div>
+
+    <div class="newest module">
+      <Title title-name="最新进展" description="最近的一些消息"/>
+      <div class="newest-block">
+        <Newest :img-url="item.imgUrl" :description="item.describes" :title="item.title" v-for="item in newest"/>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -47,20 +61,31 @@ import {getResourceList} from "@/api/resource";
 import Title from "@/components/Title/index"
 import RescourceBlock from "@/components/RescourceBlock"
 import BaseBlock from "@/components/BaseBlock/index"
-
+import OurWork from "@/components/OurWork/index"
+import Newest from "@/components/NewestBlock/index"
 
 export default {
   components: {
     Title,
     RescourceBlock,
-    BaseBlock
+    BaseBlock,
+    OurWork,
+    Newest
   },
   name: 'Dashboard',
   mounted() {
 
   },
   created() {
-    this.getPicture('rotation')
+    this.getPicture('rotation').then(res => {
+      this.rotationPic = res
+    });
+    console.log(this.rotationPic)
+    let wordImg = this.getPicture('word');
+    for (let i = 0; i < this.ourwork.length; i++) {
+      this.ourwork[i].imgUrl = wordImg[i];
+    }
+    console.log(wordImg)
     this.getBase()
     this.getResource()
     var search = {
@@ -72,6 +97,31 @@ export default {
   watch: {},
   data() {
     return {
+      newest: [],
+      ourwork: [{
+        title: '救助',
+        description: '每一个生命最基本的权力就是生存的权力，而我们做的是保证这些动物的权力。',
+        imgUrl: '',
+        svgName: 'help4'
+      },
+        {
+          title: '领养',
+          description: '你看见了一只与你投缘的动物，而它看见的是一个温暖的家',
+          imgUrl: '',
+          svgName: 'adopt3'
+        },
+        {
+          title: '资源对接',
+          description: '将我们接收到的爱传递下去，温暖永远在我们心间',
+          imgUrl: '',
+          svgName: 'give'
+        },
+        {
+          title: '宣传',
+          description: '把我们做的事告诉大家，让更多的人意识到动物们也需要被爱护。',
+          imgUrl: '',
+          svgName: 'xuanchuan'
+        }],
       url: this.$store.state.settings.url + 'img/15e45d5b50ef00974f5784fbe5acc41e.jpeg',
       // 加载变量
       listLoading: false,
@@ -96,8 +146,8 @@ export default {
     },
     getPicture(param) {
       this.listLoading = true;
-      getPicByUse(param).then((res) => {
-        this.rotationPic = res.data
+      return getPicByUse(param).then((res) => {
+        return res.data
       }).finally(() => {
         this.listLoading = false;
       })
