@@ -7,7 +7,7 @@
       <el-image
         class="main-img"
         :src="rescueItem.animal.afterRescuePhoto"
-        fit="fit"></el-image>
+        fit="cover"></el-image>
       <div v-show="!show" class="rescue-block-main-l-des">
         <div class="rescue-block-main-l-des-word">
           <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">

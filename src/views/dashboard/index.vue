@@ -3,7 +3,7 @@
     <div class="pic-for module">
       <el-carousel trigger="click" height="250px">
         <el-carousel-item v-for="item in rotationPic" :key="item.id">
-          <el-image :src="item.url" fit="fill">
+          <el-image :src="item.url" fit="cover">
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
@@ -54,10 +54,13 @@
 <script>
 import {mapGetters} from 'vuex';
 import * as echarts from 'echarts';
-import {getLabelList} from "@/api/label"
+import {getLabelList} from "@/api/label";
 import {getPicByUse} from "@/api/picture";
 import {getUserList} from "@/api/user";
 import {getResourceList} from "@/api/resource";
+import {getRescueListOrderByUpdateTime} from "@/api/resuce";
+import {getAdoptList} from "@/api/adopt";
+import {getPropagandaList} from "@/api/propaganda";
 import Title from "@/components/Title/index"
 import RescourceBlock from "@/components/RescourceBlock"
 import BaseBlock from "@/components/BaseBlock/index"
@@ -80,12 +83,12 @@ export default {
     this.getPicture('rotation').then(res => {
       this.rotationPic = res
     });
-    console.log(this.rotationPic)
-    let wordImg = this.getPicture('word');
-    for (let i = 0; i < this.ourwork.length; i++) {
-      this.ourwork[i].imgUrl = wordImg[i];
-    }
-    console.log(wordImg)
+    this.getPicture('work').then(res => {
+      for (let i = 0; i < this.ourwork.length; i++) {
+        this.ourwork[i].imgUrl = res[i].url;
+      }
+    });
+
     this.getBase()
     this.getResource()
     var search = {
@@ -93,31 +96,42 @@ export default {
       pageSize: 999
     }
     this.getLabelOptions(search)
+    search = {
+      page: 1,
+      pageSize: 1,
+      status: 'PUBLISHED',
+      associationType: 'RESCUE'
+    }
+    this.getPropaganda(search);
+    search.associationType = 'ADOPT';
+    this.getPropaganda(search);
+    search.associationType = 'RESOURCE';
+    this.getPropaganda(search);
   },
   watch: {},
   data() {
     return {
       newest: [],
       ourwork: [{
-        title: '救助',
+        title: '救助需要帮助的动物们',
         description: '每一个生命最基本的权力就是生存的权力，而我们做的是保证这些动物的权力。',
         imgUrl: '',
         svgName: 'help4'
       },
         {
-          title: '领养',
+          title: '提供一个领养平台',
           description: '你看见了一只与你投缘的动物，而它看见的是一个温暖的家',
           imgUrl: '',
           svgName: 'adopt3'
         },
         {
-          title: '资源对接',
+          title: '提供/获取需要的资源',
           description: '将我们接收到的爱传递下去，温暖永远在我们心间',
           imgUrl: '',
           svgName: 'give'
         },
         {
-          title: '宣传',
+          title: '宣传我们让更多人知道',
           description: '把我们做的事告诉大家，让更多的人意识到动物们也需要被爱护。',
           imgUrl: '',
           svgName: 'xuanchuan'
@@ -136,6 +150,30 @@ export default {
     }
   },
   methods: {
+    getPropaganda(param) {
+      this.listLoading = true;
+      getPropagandaList(param).then((res) => {
+        this.newest.push(res.data.records);
+      }).finally(() => {
+        this.listLoading = false;
+      })
+    },
+    getRescue(param) {
+      this.listLoading = true;
+      getRescueListOrderByUpdateTime(param).then((res) => {
+
+      }).finally(() => {
+        this.listLoading = false;
+      })
+    },
+    getAdopt(param) {
+      this.listLoading = true;
+      getAdoptList(param).then((res) => {
+        this.newest.push({})
+      }).finally(() => {
+        this.listLoading = false;
+      })
+    },
     getLabelOptions(search) {
       this.listLoading = true;
       getLabelList(search).then(response => {
@@ -161,7 +199,6 @@ export default {
       }
       getUserList(param).then((res) => {
         this.baseItem = res.data.records
-        console.log(this.baseItem)
       }).finally(() => {
         this.listLoading = false;
       })

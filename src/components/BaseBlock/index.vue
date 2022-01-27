@@ -59,7 +59,7 @@ export default {
     }
   },
   created() {
-    console.log(this.item)
+    // console.log(this.item)
   },
   data() {
     return {

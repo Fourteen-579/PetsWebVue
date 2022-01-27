@@ -8,6 +8,14 @@ export function getRescueList(params) {
   })
 }
 
+export function getRescueListOrderByUpdateTime(params) {
+  return request({
+    url: '/rescue/page/order/update',
+    method: 'get',
+    params
+  })
+}
+
 export function updateRescue(params) {
   return request({
     url: '/rescue/update',

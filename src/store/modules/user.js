@@ -40,7 +40,7 @@ const actions = {
         }
 
         const {nickName, photo} = data
-        console.log({nickName, photo})
+        // console.log({nickName, photo})
         commit('SET_NAME', nickName)
         commit('SET_AVATAR', photo)
         resolve(data)
@@ -55,7 +55,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
-        console.log(getToken())
+        // console.log(getToken())
         resetRouter()
         commit('RESET_STATE')
         resolve()
