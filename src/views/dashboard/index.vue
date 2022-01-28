@@ -44,7 +44,7 @@
     <div class="newest module">
       <Title title-name="最新进展" description="最近的一些消息"/>
       <div class="newest-block">
-        <Newest :img-url="item.imgUrl" :description="item.describes" :title="item.title" v-for="item in newest"/>
+        <Newest :img-url="item.photos" :description="item.describes" :title="item.title" v-for="item in newest2"/>
       </div>
     </div>
 
@@ -96,21 +96,28 @@ export default {
       pageSize: 999
     }
     this.getLabelOptions(search)
+
     search = {
       page: 1,
       pageSize: 1,
       status: 'PUBLISHED',
       associationType: 'RESCUE'
     }
-    this.getPropaganda(search);
-    search.associationType = 'ADOPT';
-    this.getPropaganda(search);
-    search.associationType = 'RESOURCE';
-    this.getPropaganda(search);
+    let _that = this
+    this.getPropaganda(search, function () {
+      search.associationType = 'ADOPT';
+      _that.getPropaganda(search, function () {
+        search.associationType = 'RESOURCE';
+        _that.getPropaganda(search, function () {
+          _that.newest2 = _that.newest
+        });
+      });
+    });
   },
   watch: {},
   data() {
     return {
+      newest2: [],
       newest: [],
       ourwork: [{
         title: '救助需要帮助的动物们',
@@ -150,11 +157,12 @@ export default {
     }
   },
   methods: {
-    getPropaganda(param) {
+    getPropaganda(param, callback) {
       this.listLoading = true;
       getPropagandaList(param).then((res) => {
-        this.newest.push(res.data.records);
+        this.newest.push(res.data.records[0]);
       }).finally(() => {
+        callback()
         this.listLoading = false;
       })
     },

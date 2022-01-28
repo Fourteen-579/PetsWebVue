@@ -1,6 +1,20 @@
 <template>
-  <div class="">
-
+  <div class="newest-main">
+    <div class="newest-img newest-block">
+      <el-image
+        class="newest-img-img"
+        :src="imgUrl[0].url"
+        fit="cover"></el-image>
+    </div>
+    <div class="newest-title newest-block">
+      {{ title }}
+    </div>
+    <div class="newest-text newest-block">
+      {{ description }}
+    </div>
+    <div class="newest-button newest-block">
+      <el-button type="success" plain>了解更多</el-button>
+    </div>
   </div>
 </template>
 
@@ -17,16 +31,71 @@ export default {
       required: true
     },
     imgUrl: {
-      type: String,
+      type: Array,
       required: true
     }
   },
+  created() {
+    this.description = this.strip(this.description)
+  },
   data() {
     return {}
+  },
+  methods: {
+    strip(html) {
+      var tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
   }
+
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.newest-main {
+  text-align: center;
+  width: 33.333%;
+  padding: 1em;
+  display: inline-block;
 
+  .newest-block {
+    margin-bottom: 0.5em;
+  }
+
+  .newest-img {
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+
+    .newest-img-img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  .newest-title {
+    font-weight: bolder;
+    font-size: 1.5em;
+  }
+
+  .newest-text {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 1em;
+  }
+
+  .newest-button {
+
+  }
+}
 </style>
