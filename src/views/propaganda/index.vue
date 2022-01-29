@@ -215,7 +215,7 @@ export default {
     .info-item {
       height: 10em;
       padding: 0.5em 0;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid #9a9a9a;
       position: relative;
 
       .info-item-img {

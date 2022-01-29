@@ -31,6 +31,14 @@ export function getUserList(params) {
   })
 }
 
+export function queryById(params) {
+  return request({
+    url: '/user/' + params,
+    method: 'get'
+  })
+}
+
+
 export function updateUser(params) {
   return request({
     url: '/user/update',

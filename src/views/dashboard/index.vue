@@ -203,7 +203,7 @@ export default {
       let param = {
         isBase: 'YES',
         page: 1,
-        pageSize: 10
+        pageSize: 3
       }
       getUserList(param).then((res) => {
         this.baseItem = res.data.records

@@ -44,6 +44,18 @@ export const constantRoutes = [
   },
 
   {
+    path: '/user',
+    component: Layout,
+    redirect: '/user',
+    children: [{
+      path: 'user',
+      name: 'user',
+      component: () => import('@/views/user/index'),
+    }],
+    hidden: true
+  },
+
+  {
     path: '/adopted',
     component: Layout,
     redirect: '/adopted',
