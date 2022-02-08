@@ -10,12 +10,29 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.el-tooltip__popper {
+  max-width: 30%;
+  padding-bottom: 5px !important;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 15;
+  -webkit-box-orient: vertical;
+
+}
+
+.el-tooltip__popper, .el-tooltip__popper.is-dark {
+  background: rgb(48, 65, 86) !important;
+  color: #fff !important;
+  line-height: 24px;
+}
+
 .el-tabs__header {
   margin: 0 0 10px;
 }
 
-.el-tabs__item {
+.el-tabs__item.is-top{
   height: 1em;
   line-height: 1em;
 }
