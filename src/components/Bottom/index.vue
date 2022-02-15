@@ -39,7 +39,7 @@ export default {
         },
         {
           label: '用户协议',
-          path: ''
+          path: '/file/user'
         },
         {
           label: '加入我们',
@@ -49,7 +49,7 @@ export default {
           path: ''
         }, {
           label: '政策法规',
-          path: ''
+          path: '/file/policy'
         }
       ],
       name: ["动物领养", "动物救助", "动物认养", "基地筹粮", "基地助养", "宠市交易", "义购商城", "动物医生", "宠物微群", "动物知识"]

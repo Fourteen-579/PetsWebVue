@@ -54,6 +54,38 @@ export const constantRoutes = [
     }],
     hidden: true
   },
+  {
+    path: '/auth',
+    component: Layout,
+    redirect: '/auth',
+    children: [{
+      path: 'auth',
+      name: 'auth',
+      component: () => import('@/views/auth/index'),
+    }],
+    hidden: true
+  },
+
+  {
+    path: '/file',
+    component: Layout,
+    children: [{
+      path: 'auth',
+      name: 'auth',
+      component: () => import('@/views/file/index'),
+    },
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/file/user'),
+      },
+      {
+        path: 'policy',
+        name: 'policy',
+        component: () => import('@/views/file/policy'),
+      }],
+    hidden: true
+  },
 
   {
     path: '/adopted',

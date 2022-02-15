@@ -245,16 +245,16 @@
         <el-form label-position="top" ref="rescueForm" :model="form" :disabled='disabledForm'
                  :rules="rescueFormRules">
           <el-row :gutter="20">
-            <el-col :span="8">
-              <el-form-item label="动物昵称" prop="name">
+            <el-col :span="12">
+              <el-form-item label="动物昵称" prop="animalDtoReq.name">
                 <el-input v-model="form.animalDtoReq.name"
                           type="text"
                           :disabled="!form.findUser === id"
                           placeholder="请输入内容"/>
               </el-form-item>
             </el-col>
-            <el-col :span="8">
-              <el-form-item label="动物年龄" prop="age">
+            <el-col :span="12">
+              <el-form-item label="动物年龄" prop="animalDtoReq.age">
                 <el-input-number
                   v-model="form.animalDtoReq.age"
                   :step="1"
@@ -263,8 +263,10 @@
                   :max="99"/>
               </el-form-item>
             </el-col>
+          </el-row>
+          <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="动物性别" prop="sex">
+              <el-form-item label="动物性别" prop="animalDtoReq.sex">
                 <el-select
                   clearable
                   v-model="form.animalDtoReq.sex"
@@ -279,10 +281,31 @@
                 </el-select>
               </el-form-item>
             </el-col>
+            <el-col :span="8">
+              <el-form-item label="种类" prop="animalDtoReq.type">
+                <el-select clearable v-model="form.animalDtoReq.type" placeholder="请选择种类">
+                  <el-option
+                    v-for="item in typeOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="救助时间" prop="rescueTime">
+                <el-date-picker
+                  style="width: auto;"
+                  v-model="form.rescueTime"
+                  type="datetime"
+                  placeholder="选择日期时间"/>
+              </el-form-item>
+            </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item label="发现地址" prop="location">
+              <el-form-item label="发现地址" prop="animalDtoReq.location">
                 <area-select v-if="rescueDialogVisible"
                              :disabled="disabledForm && !form.findUser === id"
                              v-model="form.animalDtoReq.location"
@@ -324,59 +347,6 @@
           </el-row>
           <el-row :gutter="20">
             <el-col :span="12">
-              <el-form-item label="救助前照片">
-                <el-upload
-                  class="avatar-uploader"
-                  :action="url"
-                  :show-file-list="false"
-                  :disabled="!form.findUser === id"
-                  :on-success="handleAvatarSuccessbeforRescue"
-                >
-                  <img v-if="beforRescueUrl" :src="beforRescueUrl" class="avatar"/>
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="救助后照片">
-                <el-upload
-                  class="avatar-uploader"
-                  :action="url"
-                  :show-file-list="false"
-                  :disabled="!form.rescueUser === id"
-                  :on-success="handleAvatarSuccessafterRescue"
-                >
-                  <img v-if="afterRescueUrl" :src="afterRescueUrl" class="avatar"/>
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item label="种类" prop="type">
-                <el-select clearable v-model="form.animalDtoReq.type" placeholder="请选择种类">
-                  <el-option
-                    v-for="item in typeOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="救助时间" prop="rescueTime">
-                <el-date-picker
-                  style="width: auto;"
-                  v-model="form.rescueTime"
-                  type="datetime"
-                  placeholder="选择日期时间"/>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20">
-            <el-col :span="12">
               <el-form-item label="描述" prop="describes">
                 <el-input v-model="form.describes"
                           type="textarea"
@@ -406,6 +376,36 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="救助前照片" prop="animalDtoReq.">
+                <el-upload
+                  class="avatar-uploader"
+                  :action="url"
+                  :show-file-list="false"
+                  :disabled="!form.findUser === id"
+                  :on-success="handleAvatarSuccessbeforRescue"
+                >
+                  <img v-if="beforRescueUrl" :src="beforRescueUrl" class="avatar"/>
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="救助后照片">
+                <el-upload
+                  class="avatar-uploader"
+                  :action="url"
+                  :show-file-list="false"
+                  :disabled="!form.rescueUser === id"
+                  :on-success="handleAvatarSuccessafterRescue"
+                >
+                  <img v-if="afterRescueUrl" :src="afterRescueUrl" class="avatar"/>
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="rescueDialogVisible = false">取 消</el-button>
@@ -417,7 +417,7 @@
         <el-form label-position="top" ref="adoptForm" :model="form" :disabled='disabledForm' :rules="adoptFormRules">
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="动物昵称" prop="name">
+              <el-form-item label="动物昵称" prop="animalDtoReq.name">
                 <el-input v-model="form.animalDtoReq.name"
                           type="text"
                           :disabled="!form.publisher === id"
@@ -425,7 +425,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="动物年龄" prop="age">
+              <el-form-item label="动物年龄" prop="animalDtoReq.age">
                 <el-input-number
                   v-model="form.animalDtoReq.age"
                   :step="1"
@@ -435,7 +435,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="动物性别" prop="sex">
+              <el-form-item label="动物性别" prop="animalDtoReq.sex">
                 <el-select
                   clearable
                   v-model="form.animalDtoReq.sex"
@@ -453,7 +453,7 @@
           </el-row>
           <el-row :gutter="20">
             <el-col :span="12">
-              <el-form-item label="种类" prop="type">
+              <el-form-item label="种类" prop="animalDtoReq.type">
                 <el-select clearable v-model="form.type" placeholder="请选择种类">
                   <el-option
                     v-for="item in typeOptions"
@@ -465,18 +465,18 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="领养要求" prop="requirement">
-                <el-input v-model="form.requirement"
-                          type="textarea"
-                          :disabled="!form.publisher === id"
-                          :rows="2"
-                          placeholder="请输入内容"/>
+              <el-form-item label="领养时间" prop="adoptTime">
+                <el-date-picker
+                  style="width: auto"
+                  v-model="form.adoptTime"
+                  type="datetime"
+                  placeholder="选择日期时间"/>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item label="领养地址" prop="location">
+              <el-form-item label="领养地址" prop="animalDtoReq.location">
                 <area-select v-if="adoptDialogVisible"
                              :disabled="disabledForm && !form.publisher === id"
                              v-model="form.animalDtoReq.location"
@@ -487,12 +487,12 @@
           </el-row>
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item label="领养时间" prop="adoptTime">
-                <el-date-picker
-                  style="width: auto"
-                  v-model="form.adoptTime"
-                  type="datetime"
-                  placeholder="选择日期时间"/>
+              <el-form-item label="领养要求" prop="requirement">
+                <el-input v-model="form.requirement"
+                          type="textarea"
+                          :disabled="!form.publisher === id"
+                          :rows="2"
+                          placeholder="请输入内容"/>
               </el-form-item>
             </el-col>
           </el-row>

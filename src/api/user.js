@@ -55,6 +55,14 @@ export function addUser(params) {
   })
 }
 
+export function checkInfo(params) {
+  return request({
+    url: '/user/info/check',
+    method: 'post',
+    data: params
+  })
+}
+
 export function deletedUser(id) {
   return request({
     url: '/user/delete/' + id,
