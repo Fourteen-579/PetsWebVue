@@ -30,7 +30,14 @@
         </div>
         <img class="base-for-img-pic" :src="url"/>
       </div>
-      <BaseBlock v-for="item in baseItem" :item="item"/>
+      <router-link v-for="item in baseItem" :to="{
+      path:'/base/base',
+      query:{
+        id:item.id
+      }
+      }">
+        <BaseBlock :item="item"/>
+      </router-link>
     </div>
 
     <div class="our-work-for module">

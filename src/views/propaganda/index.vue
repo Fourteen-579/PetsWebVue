@@ -18,6 +18,7 @@
       <div v-for="item in list" class="info-item">
         <div class="info-item-img">
           <el-image
+            v-if="item.photos"
             class="info-item-img-img"
             :src="item.photos[0].url"
             fit="cover"></el-image>
@@ -60,24 +61,23 @@
         全国流浪动物救助基地名录
       </div>
       <div v-for="item in baseInfo" class="base-item">
-        <div class="base-name base-item-text">
-          {{ item.nickName }}
-          <router-link to="/">
+        <router-link :to="{path:'/base/base',query:{id:item.id}}">
+          <div class="base-name base-item-text">
+            {{ item.nickName }}
             <svg-icon icon-class="toRight2" class="base-svg"/>
-          </router-link>
-        </div>
-        <div class="base-location base-item-text">
-          {{
-            pcaa[86][item.address[0]]
-          }}-
-          {{
-            pcaa[item.address[0]][item.address[1]]
-          }}-
-          {{
-            pcaa[item.address[1]][item.address[2]]
-          }}
-        </div>
-
+          </div>
+          <div class="base-location base-item-text">
+            {{
+              pcaa[86][item.address[0]]
+            }}-
+            {{
+              pcaa[item.address[0]][item.address[1]]
+            }}-
+            {{
+              pcaa[item.address[1]][item.address[2]]
+            }}
+          </div>
+        </router-link>
       </div>
     </div>
 
@@ -266,6 +266,7 @@ export default {
 
           .info-item-other-item {
             margin-right: 1em;
+
             .info-item-other-item-svg {
               width: 1em;
               height: 1em;

@@ -31,18 +31,34 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  //登录
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
 
+  //404
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
 
+  //基地信息
+  {
+    path: '/base',
+    component: Layout,
+    redirect: '/base',
+    children: [{
+      path: 'base',
+      name: 'base',
+      component: () => import('@/views/base/index'),
+    }],
+    hidden: true
+  },
+
+  //个人信息（’我的主页‘）
   {
     path: '/user',
     component: Layout,
@@ -54,6 +70,8 @@ export const constantRoutes = [
     }],
     hidden: true
   },
+
+  //基地、个人认证页面
   {
     path: '/auth',
     component: Layout,
@@ -66,6 +84,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //协议（认证协议、用户协议、政策法规）
   {
     path: '/file',
     component: Layout,
@@ -87,6 +106,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //已领养页面
   {
     path: '/adopted',
     component: Layout,
@@ -99,6 +119,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //待领养页面
   {
     path: '/toAdopted',
     component: Layout,
@@ -111,6 +132,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //已救助页面
   {
     path: '/rescued',
     component: Layout,
@@ -123,6 +145,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //待救助页面
   {
     path: '/toRescued',
     component: Layout,
@@ -135,6 +158,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //资源捐赠页面
   {
     path: '/donate',
     component: Layout,
@@ -147,6 +171,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //资源需求页面
   {
     path: '/demand',
     component: Layout,
@@ -159,6 +184,7 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //首页
   {
     path: '/',
     component: Layout,
@@ -171,6 +197,7 @@ export const constantRoutes = [
     }]
   },
 
+  //救助信息页面
   {
     path: '/rescue',
     component: Layout,
@@ -184,6 +211,7 @@ export const constantRoutes = [
       }]
   },
 
+  //领养信息页面
   {
     path: '/adopt',
     component: Layout,
@@ -198,6 +226,7 @@ export const constantRoutes = [
     ]
   },
 
+  //资源对接页面
   {
     path: '/resource',
     component: Layout,
@@ -212,6 +241,7 @@ export const constantRoutes = [
     ]
   },
 
+  //宣传信息页面
   {
     path: '/propaganda',
     component: Layout,
