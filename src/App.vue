@@ -32,6 +32,11 @@ export default {
   margin: 0 0 10px;
 }
 
+.el-tabs__nav-wrap::after{
+  height: 1.5px;
+  position: absolute;
+}
+
 .el-tabs__item.is-top{
   height: 1em;
   line-height: 1em;

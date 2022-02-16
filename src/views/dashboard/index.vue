@@ -51,7 +51,8 @@
     <div class="newest module">
       <Title title-name="最新进展" description="最近的一些消息"/>
       <div class="newest-block">
-        <Newest :img-url="item.photos" :description="item.describes" :title="item.title" v-for="item in newest2"/>
+        <Newest :item="item" :img-url="item.photos" :description="item.describes" :title="item.title"
+                v-for="item in newest2"/>
       </div>
     </div>
 

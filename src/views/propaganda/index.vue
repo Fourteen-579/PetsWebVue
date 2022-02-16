@@ -77,7 +77,6 @@ export default {
       //宣传信息
       list: [],
       total: 0,
-      page: 1,
       pageParam: {
         page: 1,
         pageSize: 10
@@ -141,7 +140,7 @@ export default {
     // 分页组件选页改变时调用函数
     currentChange(newPage) {
       this.pageParam.page = newPage
-      this.fetchData()
+      this.fetchData(this.pageParam)
     }
   }
 }

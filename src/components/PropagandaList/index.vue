@@ -1,43 +1,49 @@
 <template>
   <div>
+
     <div v-for="item in propagandaList" class="info-item">
-      <div class="info-item-img">
-        <el-image
-          v-if="item.photos"
-          class="info-item-img-img"
-          :src="item.photos[0].url"
-          fit="cover"></el-image>
-      </div>
-      <div class="info-item-show">
-        <div class="info-item-title">
-          {{ item.title }}
+      <router-link :to="{
+      path:'/propagate/propagate',
+      query:{info:item}}">
+        <div class="info-item-img">
+          <el-image
+            v-if="item.photos"
+            class="info-item-img-img"
+            :src="item.photos[0].url"
+            fit="cover"></el-image>
         </div>
-        <div class="info-item-text">
-          {{ item.describes }}
-        </div>
-        <div class="info-item-other">
+        <div class="info-item-show">
+          <div class="info-item-title">
+            {{ item.title }}
+          </div>
+          <div class="info-item-text">
+            {{ item.describes }}
+          </div>
+          <div class="info-item-other">
           <span class="info-item-other-item">
             <svg-icon icon-class="like" class="info-item-other-item-svg"/>
             <span class="info-item-other-item-text">
               {{ item.user !== null && item.user !== undefined ? item.user.length : 0 }}
             </span>
           </span>
-          <span class="info-item-other-item">
+            <span class="info-item-other-item">
             <svg-icon icon-class="comment" class="info-item-other-item-svg"/>
             <span class="info-item-other-item-text">
               {{ item.comment !== null && item.comment !== undefined ? item.comment.length : 0 }}
             </span>
           </span>
-          <span class="info-item-other-item">
+            <span class="info-item-other-item">
             <svg-icon icon-class="timeCat" class="info-item-other-item-svg"/>
             <span class="info-item-other-item-text">
               {{ $moment(item.updateTime).format('YYYY-MM-DD') }}
             </span>
           </span>
+          </div>
         </div>
-      </div>
-      <div/>
+        <div/>
+      </router-link>
     </div>
+
   </div>
 
 </template>
@@ -51,10 +57,8 @@ export default {
       type: Array
     }
   },
-  data(){
-    return{
-
-    }
+  data() {
+    return {}
   }
 }
 </script>

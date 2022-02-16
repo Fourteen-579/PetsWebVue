@@ -1,7 +1,7 @@
 <template>
   <div class="base-block">
     <div class="block-item base-name base-text">
-      <svg-icon v-if="item.isBase === 'YES'" class="base-time-svg" icon-class="start"/>
+      <svg-icon v-if="item.isStartBase === 'YES'" class="base-time-svg" icon-class="start"/>
       {{ item.nickName }}
     </div>
     <div class="block-item base-slogan base-text">

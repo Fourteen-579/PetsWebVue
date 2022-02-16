@@ -58,6 +58,20 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //宣传信息详情页面
+  {
+    path: '/propagate',
+    component: Layout,
+    children: [
+      {
+        path: 'propagate',
+        name: 'propagate',
+        component: () => import('@/views/propaganda/info')
+      }
+    ],
+    hidden: true
+  },
+
   //个人信息（’我的主页‘）
   {
     path: '/user',

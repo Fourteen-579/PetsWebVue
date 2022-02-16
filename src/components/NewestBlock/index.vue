@@ -2,6 +2,7 @@
   <div class="newest-main">
     <div class="newest-img newest-block">
       <el-image
+        v-if="imgUrl"
         class="newest-img-img"
         :src="imgUrl[0].url"
         fit="cover"></el-image>
@@ -13,7 +14,11 @@
       {{ description }}
     </div>
     <div class="newest-button newest-block">
-      <el-button type="success" plain>了解更多</el-button>
+      <router-link :to="{
+      path:'/propagate/propagate',
+      query:{info:item}}">
+        <el-button type="success" plain>了解更多</el-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -22,6 +27,10 @@
 export default {
   name: "Newest",
   props: {
+    item:{
+      type: Object,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -84,6 +93,7 @@ export default {
   }
 
   .newest-text {
+    height: 3.5em;
     display: -webkit-box;
     overflow: hidden;
     white-space: normal !important;
