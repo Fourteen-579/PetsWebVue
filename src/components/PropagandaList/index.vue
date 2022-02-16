@@ -4,7 +4,7 @@
     <div v-for="item in propagandaList" class="info-item">
       <router-link :to="{
       path:'/propagate/propagate',
-      query:{info:item}}">
+      query:{id:item.id}}">
         <div class="info-item-img">
           <el-image
             v-if="item.photos"
@@ -23,13 +23,13 @@
           <span class="info-item-other-item">
             <svg-icon icon-class="like" class="info-item-other-item-svg"/>
             <span class="info-item-other-item-text">
-              {{ item.user !== null && item.user !== undefined ? item.user.length : 0 }}
+              {{ item.user !== null && item.user !== undefined ? item.user.length : 0 }}个喜欢
             </span>
           </span>
             <span class="info-item-other-item">
             <svg-icon icon-class="comment" class="info-item-other-item-svg"/>
             <span class="info-item-other-item-text">
-              {{ item.comment !== null && item.comment !== undefined ? item.comment.length : 0 }}
+              {{ item.comment !== null && item.comment !== undefined ? item.comment.length : 0 }}条评论
             </span>
           </span>
             <span class="info-item-other-item">

@@ -16,7 +16,7 @@
     <div class="newest-button newest-block">
       <router-link :to="{
       path:'/propagate/propagate',
-      query:{info:item}}">
+      query:{id:item.id}}">
         <el-button type="success" plain>了解更多</el-button>
       </router-link>
     </div>
@@ -27,7 +27,7 @@
 export default {
   name: "Newest",
   props: {
-    item:{
+    item: {
       type: Object,
       required: true
     },
