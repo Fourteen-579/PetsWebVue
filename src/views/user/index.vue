@@ -12,6 +12,12 @@
         <div class="user-info-name">
           {{ name }}
         </div>
+        <router-link to="/user/edit">
+          <div class="user-info-edit">
+            <svg-icon icon-class="edit"/>
+            编辑个人信息
+          </div>
+        </router-link>
         <div class="user-info-word">
           您已在本网站注册
           <span class="user-info-word-num">
@@ -41,7 +47,7 @@
         tab-position="left"
         :before-leave="changTab"
         class="user-list-tab">
-        <div class="user-list-search">
+        <div class="user-list-search" v-if="tabChoose !== 'info'">
           <el-input
             class="user-list-tab-search"
             type="text"
@@ -55,6 +61,56 @@
           <el-button class="user-list-tab-button" type="success" plain icon="el-icon-search" @click="search">搜索
           </el-button>
         </div>
+        <el-tab-pane label="基本信息" name="info">
+          <div class="user-list-tab-info">
+            <div class="user-list-tab-info-label">
+              所在地：
+            </div>
+            <div class="user-list-tab-info-text" v-if="userInfo.address != null && userInfo.address != []">
+              {{
+                pcaa[86][userInfo.address[0]]
+              }}-
+              {{
+                pcaa[userInfo.address[0]][userInfo.address[1]]
+              }}-
+              {{
+                pcaa[userInfo.address[1]][userInfo.address[2]]
+              }}
+            </div>
+          </div>
+          <div class="user-list-tab-info" v-if="userInfo.isBase === 'YES' && userInfo.baseCreateTime">
+            <div class="user-list-tab-info-label">
+              基地建立时间：
+            </div>
+            <div class="user-list-tab-info-text">
+              {{ $moment(userInfo.baseCreateTime).format('YYYY-MM-DD') }}
+            </div>
+          </div>
+          <div class="user-list-tab-info">
+            <div class="user-list-tab-info-label">
+              联系邮箱：
+            </div>
+            <div class="user-list-tab-info-text">
+              {{ userInfo.email }}
+            </div>
+          </div>
+          <div class="user-list-tab-info">
+            <div class="user-list-tab-info-label">
+              帮助过的动物数量：
+            </div>
+            <div class="user-list-tab-info-text">
+              {{ userInfo.adoptNum + userInfo.rescueNum }}
+            </div>
+          </div>
+          <div class="user-list-tab-info">
+            <div class="user-list-tab-info-label">
+              描述：
+            </div>
+            <div class="user-list-tab-info-text user-list-tab-info-describe">
+              {{ userInfo.describes }}
+            </div>
+          </div>
+        </el-tab-pane>
         <el-tab-pane :lazy="true" label="救助信息" name="rescue">
           <el-table :data="tableList" border fit>
             <el-table-column label="发布人" width="110" align="center">
@@ -231,6 +287,7 @@
           </el-table>
         </el-tab-pane>
         <el-pagination
+          v-if="tabChoose !== 'info'"
           class="page-component"
           background
           layout="prev, pager, next"
@@ -808,7 +865,7 @@ export default {
       //资源对接图片
       fileList: [],
       //当前选择为哪个tab
-      tabChoose: 'rescue',
+      tabChoose: 'info',
       //当前tab展示的表格数据
       tableList: [],
       total: 0,
@@ -935,7 +992,6 @@ export default {
           label: '其他'
         }
       ],
-
     }
   },
   created() {
@@ -1164,14 +1220,12 @@ export default {
         this.table.page = 1
       }
       this.table.participantId = this.id
+      this.tabChoose = active
       if (active === 'rescue') {
-        this.tabChoose = 'rescue'
         this.getRescueData()
       } else if (active === 'adopt') {
-        this.tabChoose = 'adopt'
         this.getAdoptData()
       } else if (active === 'resource') {
-        this.tabChoose = 'resource'
         this.getResourceData()
       }
     },
@@ -1256,9 +1310,17 @@ export default {
       vertical-align: top;
 
       .user-info-name {
+        display: inline-block;
         font-size: 1.5em;
         line-height: 2em;
         font-weight: bolder;
+      }
+
+      .user-info-edit {
+        display: inline-block;
+        color: #bfbfbf;
+        font-size: 0.9em;
+        margin-left: 1em;
       }
 
       .user-info-word {
@@ -1278,6 +1340,34 @@ export default {
 
     .user-list-tab {
       margin: 1em 0;
+
+      .user-list-tab-info {
+        font-size: 0.95em;
+        line-height: 1.45em;
+        margin: 1em 0;
+        color: #5a5e66;
+
+        .user-list-tab-info-label {
+          display: inline-block;
+        }
+
+        .user-list-tab-info-text {
+          display: inline-block;
+        }
+
+        .user-list-tab-info-describe {
+          text-indent: 2em;
+          display: -webkit-box;
+          overflow: hidden;
+          white-space: normal !important;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+
+
+      }
 
       .user-list-search {
         margin-bottom: 1em;

@@ -81,7 +81,12 @@ export const constantRoutes = [
       path: 'user',
       name: 'user',
       component: () => import('@/views/user/index'),
-    }],
+    },
+      {
+        path: 'edit',
+        name: 'edit',
+        component: () => import('@/views/user/edit'),
+      }],
     hidden: true
   },
 
