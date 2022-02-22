@@ -38,6 +38,13 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //注册
+  {
+    path: '/register',
+    component: () => import('@/views/login/register'),
+    hidden: true
+  },
+
   //404
   {
     path: '/404',

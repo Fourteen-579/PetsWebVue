@@ -10,7 +10,7 @@
     >
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">流浪动物救助平台</h3>
       </div>
 
       <el-form-item prop="username">
@@ -53,16 +53,21 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >Login
+      >登录
       </el-button>
 
     </el-form>
+    <div class="register-router">
+      <router-link to="/register">
+        没有账号？点击这里注册
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import {login} from "@/api/user";
-import {getToken,setToken} from "@/utils/auth";
+import {getToken, setToken} from "@/utils/auth";
 
 export default {
   name: 'Login',
@@ -231,5 +236,11 @@ $light_gray: #eee;
     cursor: pointer;
     user-select: none;
   }
+}
+
+.register-router {
+  display: block;
+  text-align: center;
+  color: white;
 }
 </style>
