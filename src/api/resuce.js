@@ -38,3 +38,10 @@ export function deletedRescue(id) {
     method: 'delete'
   })
 }
+
+export function queryById(id) {
+  return request({
+    url: '/rescue/' + id,
+    method: 'get'
+  })
+}

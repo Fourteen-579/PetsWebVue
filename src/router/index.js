@@ -79,6 +79,24 @@ export const constantRoutes = [
     hidden: true
   },
 
+  //步骤页面（接受、发布）
+  {
+    path: '/step',
+    component: Layout,
+    redirect: '/step',
+    children: [{
+      path: 'publish',
+      name: 'publish',
+      component: () => import('@/views/step/publish'),
+    },
+      {
+        path: 'accept',
+        name: 'accept',
+        component: () => import('@/views/step/accept'),
+      }],
+    hidden: true
+  },
+
   //个人信息（’我的主页‘）
   {
     path: '/user',

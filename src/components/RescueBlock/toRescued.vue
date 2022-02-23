@@ -133,7 +133,16 @@
                   </div>
                 </div>
                 <div class="rescue-block-block rescue-block-button">
-                  <el-button type="success" plain size="mini" round>我要救助它！</el-button>
+                  <el-button type="success"
+                             plain
+                             size="mini"
+                             round
+                             @click="$router.push({path:'/step/accept',
+                 query:{
+                   typeStr:'rescue',
+          infoId:rescueItem.id
+                 }})">我要救助它！
+                  </el-button>
                 </div>
               </div>
             </el-tab-pane>

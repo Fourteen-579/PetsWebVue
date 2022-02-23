@@ -116,6 +116,7 @@ export default {
   .infinite-list-wrapper {
     overflow-y: hidden;
     height: calc(100vh - 50px);
+    margin-bottom: 5px;
     margin-top: 10px;
 
     .list {

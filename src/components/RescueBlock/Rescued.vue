@@ -145,13 +145,6 @@
               </div>
             </el-tab-pane>
           </el-tabs>
-          <div @mouseover="svgClass = 'adopt2'"
-               @mouseleave="svgClass = 'adopt2hover'"
-               class="rescue-block-block rescue-block-button"
-               v-if="rescueItem.animal.status === 'TOBEADOPTED'"
-               title="点击领养">
-            <svg-icon class="rescue-block-button-svg" :icon-class="svgClass"/>
-          </div>
         </div>
       </div>
     </transition>

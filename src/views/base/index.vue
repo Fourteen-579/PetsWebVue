@@ -241,6 +241,7 @@ export default {
   position: relative;
   background: white;
   min-height: calc(100vh - 50px);
+  margin-bottom: 5px;
 
   .base-body-background {
     position: absolute;

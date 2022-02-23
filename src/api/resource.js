@@ -30,3 +30,10 @@ export function deletedResource(id) {
     method: 'delete'
   })
 }
+
+export function queryById(id) {
+  return request({
+    url: '/resource/' + id,
+    method: 'get'
+  })
+}

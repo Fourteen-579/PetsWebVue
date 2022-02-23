@@ -43,7 +43,14 @@
       </div>
     </div>
     <div class="block-item resource-botton">
-      <el-button type="success" plain size="mini" round>{{ item.type != 'DONATE' ? '我需要它！' : '我要捐赠！' }}</el-button>
+      <router-link :to="{
+        path: '/step/accept',
+        query: {
+          typeStr:typeString,
+          infoId:item.id
+        }}">
+        <el-button type="success" plain size="mini" round>{{ item.type != 'DONATE' ? '我需要它！' : '我要捐赠！' }}</el-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -69,7 +76,8 @@ export default {
   data() {
     return {
       //地区数据
-      pcaa: pcaa
+      pcaa: pcaa,
+      typeString: 'resource',
     }
   }
 }

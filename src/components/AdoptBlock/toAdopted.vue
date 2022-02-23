@@ -130,7 +130,18 @@
                   </div>
                 </div>
                 <div class="adopt-block-block adopt-block-button">
-                  <el-button type="success" plain size="mini" round>我要领养它！</el-button>
+                  <el-button
+                    type="success"
+                    plain
+                    size="mini"
+                    round
+                    @click="$router.push({path:'/step/accept',
+                 query:{
+                   typeStr:'adopt',
+          infoId:adoptItem.id
+                 }})"
+                  >我要领养它！
+                  </el-button>
                 </div>
               </div>
             </el-tab-pane>

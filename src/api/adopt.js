@@ -30,3 +30,10 @@ export function deletedAdopt(id) {
     method: 'delete'
   })
 }
+
+export function queryById(id) {
+  return request({
+    url: '/adopt/' + id,
+    method: 'get'
+  })
+}

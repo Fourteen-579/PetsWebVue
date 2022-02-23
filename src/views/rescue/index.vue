@@ -4,7 +4,11 @@
       <Rotation/>
     </div>
     <div class="main-block button">
-      <router-link to="/">
+      <router-link :to="{
+        path: '/step/publish',
+        query: {
+          typeStr:'rescue'
+        }}">
         <el-button type="success">我要发布</el-button>
       </router-link>
     </div>

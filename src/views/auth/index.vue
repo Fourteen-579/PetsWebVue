@@ -1,7 +1,7 @@
 <template>
   <div class="auth-body-main">
     <div class="auth-body"
-         v-if="(userInfo.isAuth === null||userInfo.isAuth === undefined || userInfo.isAuth === '')&&(userInfo.baseAuthenticationDtoResult === null||userInfo.baseAuthenticationDtoResult === undefined)"
+         v-if="(userInfo.isAuth === null||userInfo.isAuth === undefined || userInfo.isAuth === 'NULL')&&(userInfo.baseAuthenticationDtoResult === null||userInfo.baseAuthenticationDtoResult === undefined)"
          :v-loading="listLoading">
       <div class="auth-text">
         <div class="auth-title">
@@ -162,7 +162,7 @@
           <el-checkbox
             class="auth-buttom-left"
             v-model="checked">我已阅读
-            <router-link to="/file/auth">《动保联盟基地认证协议》</router-link>
+            <router-link to="/file/auth" style="color: #20a0ff">《动保联盟基地认证协议》</router-link>
           </el-checkbox>
           <el-button
             :disabled="!checked"
@@ -422,6 +422,7 @@ export default {
 .auth-success {
   background-color: white;
   height: calc(100vh - 50px);
+  margin-bottom: 5px;
   width: 100%;
   position: relative;
   text-align: center;

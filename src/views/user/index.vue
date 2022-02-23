@@ -147,16 +147,23 @@
               <template slot-scope="scope">
                 <el-tag :type="scope.row.isApproved | isFilter">
                   {{
-                    isOptions.find(function (value) {
-                      return value.value === scope.row.isApproved;
-                    }).label
+                    scope.row.isApproved ?
+                      isOptions.find(function (value) {
+                        return value.value === scope.row.isApproved;
+                      }).label : '等待审核'
                   }}
                 </el-tag>
               </template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="getInfo(scope.row)">详情</el-button>
+                <el-button type="text"
+                           @click="$router.push({path:'/step/publish',
+                 query:{
+                   typeStr:'rescue',
+                    infoId:scope.row.id
+                 }})">详情
+                </el-button>
                 <el-button type="text" @click="updateInfo(scope.row)">编辑</el-button>
                 <el-button v-if="id === scope.row.findUser" type="text" @click="deleteInfo(scope.row)">删除</el-button>
               </template>
@@ -192,10 +199,12 @@
             </el-table-column>
             <el-table-column class-name="status-col" label="是否审核通过" width="110" align="center">
               <template slot-scope="scope">
-                <el-tag :type="scope.row.isApproved | isFilter">{{
-                    isOptions.find(function (value) {
-                      return value.value === scope.row.isApproved;
-                    }).label
+                <el-tag :type="scope.row.isApproved | isFilter">
+                  {{
+                    scope.row.isApproved ?
+                      isOptions.find(function (value) {
+                        return value.value === scope.row.isApproved;
+                      }).label : '等待审核'
                   }}
                 </el-tag>
               </template>
@@ -269,10 +278,12 @@
             </el-table-column>
             <el-table-column class-name="status-col" label="是否审核通过" width="110" align="center">
               <template slot-scope="scope">
-                <el-tag :type="scope.row.isApproved | isFilter">{{
-                    isOptions.find(function (value) {
-                      return value.value === scope.row.isApproved;
-                    }).label
+                <el-tag :type="scope.row.isApproved | isFilter">
+                  {{
+                    scope.row.isApproved ?
+                      isOptions.find(function (value) {
+                        return value.value === scope.row.isApproved;
+                      }).label : '等待审核'
                   }}
                 </el-tag>
               </template>
