@@ -1,15 +1,7 @@
 <template>
   <div v-loading="listLoading" class="dashboard-container">
-    <div class="pic-for module">
-      <el-carousel trigger="click" height="250px">
-        <el-carousel-item v-for="item in rotationPic" :key="item.id">
-          <el-image :src="item.url" fit="cover">
-            <div slot="error" class="image-slot">
-              <i class="el-icon-picture-outline"></i>
-            </div>
-          </el-image>
-        </el-carousel-item>
-      </el-carousel>
+    <div class="module">
+      <Rotation/>
     </div>
 
     <div class="resource-for module">
@@ -60,8 +52,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import * as echarts from 'echarts';
+
 import {getLabelList} from "@/api/label";
 import {getPicByUse} from "@/api/picture";
 import {getUserList} from "@/api/user";
@@ -74,6 +65,7 @@ import RescourceBlock from "@/components/RescourceBlock"
 import BaseBlock from "@/components/BaseBlock/index"
 import OurWork from "@/components/OurWork/index"
 import Newest from "@/components/NewestBlock/index"
+import Rotation from "@/components/Rotation/index"
 
 export default {
   components: {
@@ -81,22 +73,19 @@ export default {
     RescourceBlock,
     BaseBlock,
     OurWork,
-    Newest
+    Newest,
+    Rotation
   },
   name: 'Dashboard',
   mounted() {
 
   },
   created() {
-    this.getPicture('rotation').then(res => {
-      this.rotationPic = res
-    });
     this.getPicture('work').then(res => {
       for (let i = 0; i < this.ourwork.length; i++) {
         this.ourwork[i].imgUrl = res[i].url;
       }
     });
-
     this.getBase()
     this.getResource()
     var search = {
@@ -154,8 +143,6 @@ export default {
       url: this.$store.state.settings.url + 'img/15e45d5b50ef00974f5784fbe5acc41e.jpeg',
       // 加载变量
       listLoading: false,
-      //轮播图数据
-      rotationPic: [],
       //基地数据
       baseItem: [],
       //资源对接数据
@@ -243,24 +230,6 @@ export default {
 
   .module {
     margin-bottom: 20px;
-  }
-
-  .pic-for {
-    .el-carousel__item h3 {
-      color: #475669;
-      font-size: 14px;
-      opacity: 0.75;
-      line-height: 150px;
-      margin: 0;
-    }
-
-    .el-carousel__item:nth-child(2n) {
-      background-color: #99a9bf;
-    }
-
-    .el-carousel__item:nth-child(2n+1) {
-      background-color: #d3dce6;
-    }
   }
 
   .resource-for {

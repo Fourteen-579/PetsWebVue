@@ -1,5 +1,13 @@
 <template>
   <div class="app-container">
+    <div class="main-block">
+      <Rotation/>
+    </div>
+    <div class="main-block button">
+      <router-link to="/">
+        <el-button type="success">我要发布</el-button>
+      </router-link>
+    </div>
     <div class="main-block to-rescued">
       <Title titleName="待救助动物" link="/toRescued/toRescued"/>
       <ToRescueBlock :rescue-item="item" v-for="item in toRescuedList"/>
@@ -16,12 +24,14 @@ import {getRescueList} from '@/api/resuce'
 import ToRescueBlock from "@/components/RescueBlock/toRescued"
 import Rescued from "@/components/RescueBlock/Rescued";
 import Title from "@/components/Title/index"
+import Rotation from "@/components/Rotation/index"
 
 export default {
   components: {
     ToRescueBlock,
     Title,
-    Rescued
+    Rescued,
+    Rotation
   },
   data() {
     return {
@@ -71,6 +81,12 @@ export default {
 
 .main-block {
   width: calc(100%);
+}
+
+.button {
+  margin: 1em 0;
+  display: block;
+  text-align: center;
 }
 
 </style>

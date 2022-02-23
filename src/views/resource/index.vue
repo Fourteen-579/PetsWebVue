@@ -1,5 +1,13 @@
 <template>
   <div class="app-container">
+    <div class="main-block">
+      <Rotation/>
+    </div>
+    <div class="main-block button">
+      <router-link to="/">
+        <el-button type="success">我要发布</el-button>
+      </router-link>
+    </div>
     <div class="main-block donate">
       <Title class="main-block-title" titleName="资源捐赠" link="/donate/donate"/>
       <RescourceBlock v-for="item in donateList" :item="item" :labelOption="labelOption"/>
@@ -16,11 +24,13 @@ import RescourceBlock from "@/components/RescourceBlock/index"
 import Title from "@/components/Title/index"
 import {getLabelList} from "@/api/label";
 import {getResourceList} from "@/api/resource";
+import Rotation from "@/components/Rotation/index"
 
 export default {
   components: {
     Title,
-    RescourceBlock
+    RescourceBlock,
+    Rotation
   },
   data() {
     return {
@@ -94,4 +104,9 @@ export default {
   }
 }
 
+.button {
+  margin: 1em 0;
+  display: block;
+  text-align: center;
+}
 </style>

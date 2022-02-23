@@ -1,5 +1,13 @@
 <template>
   <div class="app-container">
+    <div class="main-block">
+      <Rotation/>
+    </div>
+    <div class="main-block button">
+      <router-link to="/">
+        <el-button type="success">我要发布</el-button>
+      </router-link>
+    </div>
     <div class="main-block to-adopted">
       <Title titleName="待领养动物" link="/toAdopted/toAdopted"/>
       <ToAdoptedBlock :adopt-item="item" v-for="item in toAdoptedList"/>
@@ -16,12 +24,14 @@ import {getAdoptList} from "@/api/adopt";
 import AdoptedBlock from '@/components/AdoptBlock/Adopted'
 import Title from "@/components/Title/index"
 import ToAdoptedBlock from '@/components/AdoptBlock/toAdopted'
+import Rotation from "@/components/Rotation/index"
 
 export default {
   components: {
     AdoptedBlock,
     Title,
-    ToAdoptedBlock
+    ToAdoptedBlock,
+    Rotation
   },
   data() {
     return {
@@ -73,4 +83,9 @@ export default {
   width: calc(100%);
 }
 
+.button {
+  margin: 1em 0;
+  display: block;
+  text-align: center;
+}
 </style>
