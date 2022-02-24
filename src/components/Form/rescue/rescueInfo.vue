@@ -107,7 +107,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="24">
-            <el-form-item label="救助前照片" prop="animalDtoReq.">
+            <el-form-item label="救助前照片" prop="animalDtoReq.beforRescuePhoto">
               <el-upload
                 class="avatar-uploader"
                 :action="url"
@@ -344,6 +344,7 @@ export default {
     submit(flag) {
       this.$refs['rescueForm'].validate((valid) => {
         if (valid) {
+          this.form.isApproved = ''
           this.listLoading = true
           this.form.findUser = this.id
           if (flag == 0) {

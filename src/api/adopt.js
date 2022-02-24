@@ -31,7 +31,7 @@ export function deletedAdopt(id) {
   })
 }
 
-export function queryById(id) {
+export function queryAdoptById(id) {
   return request({
     url: '/adopt/' + id,
     method: 'get'

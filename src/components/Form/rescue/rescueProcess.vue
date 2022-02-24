@@ -111,7 +111,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import {addRescue, queryRescueById, updateRescue} from "@/api/resuce";
+import {queryRescueById, updateRescue} from "@/api/resuce";
 
 export default {
   name: "rescueProcess",

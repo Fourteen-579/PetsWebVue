@@ -16,6 +16,15 @@ export function updateResource(params) {
   })
 }
 
+export function updateResourceStatus(params) {
+  return request({
+    url: '/resource/update/status',
+    method: 'put',
+    data: params
+  })
+}
+
+
 export function addResource(params) {
   return request({
     url: '/resource/add',
@@ -31,7 +40,7 @@ export function deletedResource(id) {
   })
 }
 
-export function queryById(id) {
+export function queryResourceById(id) {
   return request({
     url: '/resource/' + id,
     method: 'get'

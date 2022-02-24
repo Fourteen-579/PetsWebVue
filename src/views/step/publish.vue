@@ -13,10 +13,10 @@
           <rescue-info :info-id="infoId" :is-change="isChange"/>
         </div>
         <div v-else-if="type==='adopt'">
-
+          <adopt-info :info-id="infoId" :is-change="isChange"/>
         </div>
         <div v-else-if="type==='resource'">
-
+          <resource-info :info-id="infoId" :is-change="isChange"/>
         </div>
       </div>
       <div v-else-if="active===2" class="main-body-step-2">
@@ -51,10 +51,10 @@
           <rescue-process :info-id="infoId" :active="active" v-on:activeChange="activeChange($event)"/>
         </div>
         <div v-else-if="type==='adopt'">
-
+          <adopt-process :info-id="infoId" :active="active" v-on:activeChange="activeChange($event)"/>
         </div>
         <div v-else-if="type==='resource'">
-
+          <resource-process :info-id="infoId" :active="active" v-on:activeChange="activeChange($event)"/>
         </div>
       </div>
       <div v-else-if="active===4" class="main-body-step-4">
@@ -76,8 +76,8 @@ import adoptInfo from "@/components/Form/adopt/adoptInfo";
 import adoptProcess from "@/components/Form/adopt/adoptProcess";
 import resourceInfo from "@/components/Form/resource/resourceInfo";
 import resourceProcess from "@/components/Form/resource/resourceProcess";
-import {updateAdopt} from "@/api/adopt";
-import {updateResource} from "@/api/resource";
+import {queryAdoptById, updateAdopt} from "@/api/adopt";
+import {queryResourceById, updateResource, updateResourceStatus} from "@/api/resource";
 
 
 export default {
@@ -102,7 +102,7 @@ export default {
     await this.fetchData(this.id)
     this.type = this.$route.query.typeStr
     this.infoId = this.$route.query.infoId
-    console.log(this.infoId)
+
     if (this.infoId !== null && this.infoId !== undefined && this.infoId != '=') {
       await this.getInfoById(this.infoId)
     }
@@ -150,7 +150,7 @@ export default {
             path: '/auth/auth'
           })
         }
-      }).finally((response) => {
+      }).finally(() => {
         this.listLoading = false
       })
     },
@@ -164,30 +164,53 @@ export default {
       })
     },
     //如果有infoId则获取对应信息
-    getInfoById(param) {
+    async getInfoById(param) {
       this.listLoading = true
-      queryRescueById(param).then(response => {
-        if (response.code == 200) {
-          this.info = response.data
-          if (this.info.status === 'UNCOMMIT' || this.info.status === 'UNAPPROVED') {
-            this.active = 1
-          } else if (this.info.status === 'WAITING' || this.info.status === 'TALKING') {
-            this.active = 2
-            //获取是否有对接人 如果有则获取对方联系方式
-            if (this.info.rescueUser) {
-              this.getAcceptUserInfo(this.info.rescueUser)
-            }
-          } else if (this.info.status === 'UPLOAD') {
-            this.active = 3
+      let response = null
+      if (this.type === 'rescue') {
+        await queryRescueById(param).then(res => {
+          response = res
+        })
+      } else if (this.type === 'adopt') {
+        await queryAdoptById(param).then(res => {
+          response = res
+        })
+      } else {
+        await queryResourceById(param).then(res => {
+          response = res
+        })
+      }
+      this.listLoading = false
+      if (response.code == 200) {
+        this.info = response.data
+        if (this.info.status === 'UNCOMMIT' || this.info.status === 'UNAPPROVED') {
+          this.active = 1
+        } else if (this.info.status === 'WAITING' || this.info.status === 'TALKING') {
+          this.active = 2
+          //获取是否有对接人 如果有则获取对方联系方式
+          let acceptUser = null
+          if (this.type === 'rescue') {
+            acceptUser = this.info.rescueUser
+          } else if (this.type === 'adopt') {
+            acceptUser = this.info.adoptUser
           } else {
-            this.active = 4
+            if (this.info.givee === this.id) {
+              acceptUser = this.info.donor
+            } else if (this.info.donor === this.id) {
+              acceptUser = this.info.givee
+            }
           }
-          console.log(this.active)
+          if (acceptUser) {
+            this.getAcceptUserInfo(acceptUser)
+          }
+        } else if (this.info.status === 'UPLOAD') {
+          this.active = 3
         } else {
-          this.$message.error('获取失败');
+          this.active = 4
         }
-        this.listLoading = false
-      })
+      } else {
+        this.$message.error('获取失败');
+      }
     },
     async changeStatus(status, flag) {
       let form = {
@@ -220,7 +243,7 @@ export default {
             form.givee = ''
           }
         }
-        await updateResource(form).then((res) => {
+        await updateResourceStatus(form).then((res) => {
           result = res
         })
       }
@@ -233,6 +256,7 @@ export default {
           this.acceptInfo = null
         } else if (this.info.status === 'UPLOAD') {
           this.active = 3
+          location.reload()
         }
       } else {
         this.$message.error("操作错误，请再次尝试！")

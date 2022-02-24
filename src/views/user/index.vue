@@ -221,7 +221,12 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="getInfo(scope.row)">详情</el-button>
+                <el-button type="text" @click="$router.push({path:'/step/publish',
+                 query:{
+                   typeStr:'adopt',
+                    infoId:scope.row.id
+                 }})">详情
+                </el-button>
                 <el-button type="text" @click="updateInfo(scope.row)">编辑</el-button>
                 <el-button v-if="id === scope.row.publisher" type="text" @click="deleteInfo(scope.row)">删除</el-button>
               </template>
@@ -290,7 +295,12 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" align="center">
               <template slot-scope="scope">
-                <el-button type="text" @click="getInfo(scope.row)">详情</el-button>
+                <el-button type="text" @click="$router.push({path:'/step/publish',
+                 query:{
+                   typeStr:'resource',
+                    infoId:scope.row.id
+                 }})">详情
+                </el-button>
                 <el-button type="text" @click="updateInfo(scope.row)">编辑</el-button>
                 <el-button v-if="id === scope.row.createUser" type="text" @click="deleteInfo(scope.row)">删除</el-button>
               </template>
