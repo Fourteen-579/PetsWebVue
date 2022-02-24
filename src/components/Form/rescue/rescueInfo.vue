@@ -129,7 +129,7 @@
 
     <div class="rescueInfo-body-isUpload" v-if="!isUpload">
       <div class="rescueInfo-body-message"
-           v-if="form.isApproved === null">
+           v-if="form.isApproved === null || form.isApproved === ''">
         <svg-icon icon-class="wait" class="rescueInfo-body-message-svg"/>
         <div class="rescueInfo-body-text">
           你的信息已提交,请等待审核!
@@ -160,6 +160,9 @@ export default {
     infoId: {
       type: String,
       default: ''
+    },
+    isChange: {
+      type: Boolean
     }
   },
   computed: {
@@ -175,7 +178,12 @@ export default {
       this.isUpload = true
     } else {
       this.getInfoById(this.infoId)
-      this.isUpload = false
+
+      if ((this.isChange !== null && this.isChange == true)) {
+        this.isUpload = true
+      } else {
+        this.isUpload = false
+      }
     }
   },
   watch: {
@@ -297,7 +305,7 @@ export default {
             neededItems: temp.neededItems,
             findLocation: temp.findLocation,
             status: temp.status,
-            isApproved: temp.isApproved ? temp.isApproved : null,
+            isApproved: temp.isApproved ? temp.isApproved : '',
             animalDtoReq: {
               id: temp.animal.id,
               name: temp.animal.name,

@@ -10,7 +10,7 @@
     <div class="main-body-show">
       <div v-if="active===1">
         <div v-if="type==='rescue'">
-          <rescue-info :info-id="infoId"/>
+          <rescue-info :info-id="infoId" :is-change="isChange"/>
         </div>
         <div v-else-if="type==='adopt'">
 
@@ -29,10 +29,10 @@
           </div>
           <div class="main-body-step-2-button-two">
             <div class="main-body-step-2-button">
-              <el-button plain type="success">对接完成</el-button>
+              <el-button plain type="success" @click="changeStatus('UPLOAD',1)">对接完成</el-button>
             </div>
             <div class="main-body-step-2-button" title="请慎重选择哦~">
-              <el-button plain>放弃这次对接</el-button>
+              <el-button plain @click="changeStatus('WAITING',0)">放弃这次对接</el-button>
             </div>
           </div>
         </div>
@@ -42,9 +42,25 @@
             你的信息已经审核通过啦,请等待对接人!
           </div>
           <div class="main-body-step-2-button" title="请慎重选择哦~">
-            <el-button plain>重新提交信息</el-button>
+            <el-button plain @click="changeStatus('UNCOMMIT',1)">重新提交信息</el-button>
           </div>
         </div>
+      </div>
+      <div v-else-if="active===3">
+        <div v-if="type==='rescue'">
+          <rescue-process :info-id="infoId" :active="active" v-on:activeChange="activeChange($event)"/>
+        </div>
+        <div v-else-if="type==='adopt'">
+
+        </div>
+        <div v-else-if="type==='resource'">
+
+        </div>
+      </div>
+      <div v-else-if="active===4" class="main-body-step-4">
+        <svg-icon icon-class="finsh" class="main-body-step-4-svg"/>
+        这次帮助小动物已经完成啦~感谢你的爱心~
+        <svg-icon icon-class="catdog" class="main-body-step-4-svg-button"/>
       </div>
     </div>
   </div>
@@ -52,7 +68,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import {queryRescueById} from "@/api/resuce";
+import {queryRescueById, updateRescue} from "@/api/resuce";
 import {queryById} from "@/api/user"
 import rescueInfo from "@/components/Form/rescue/rescueInfo";
 import rescueProcess from "@/components/Form/rescue/rescueProcess";
@@ -60,6 +76,8 @@ import adoptInfo from "@/components/Form/adopt/adoptInfo";
 import adoptProcess from "@/components/Form/adopt/adoptProcess";
 import resourceInfo from "@/components/Form/resource/resourceInfo";
 import resourceProcess from "@/components/Form/resource/resourceProcess";
+import {updateAdopt} from "@/api/adopt";
+import {updateResource} from "@/api/resource";
 
 
 export default {
@@ -84,6 +102,7 @@ export default {
     await this.fetchData(this.id)
     this.type = this.$route.query.typeStr
     this.infoId = this.$route.query.infoId
+    console.log(this.infoId)
     if (this.infoId !== null && this.infoId !== undefined && this.infoId != '=') {
       await this.getInfoById(this.infoId)
     }
@@ -107,9 +126,14 @@ export default {
       userInfo: null,
       //对接用户信息
       acceptInfo: null,
+      //第二步是否修改信息
+      isChange: null
     }
   },
   methods: {
+    activeChange(num) {
+      this.active = num
+    },
     // 获取用户数据
     fetchData(param) {
       this.listLoading = true
@@ -165,6 +189,55 @@ export default {
         this.listLoading = false
       })
     },
+    async changeStatus(status, flag) {
+      let form = {
+        id: this.infoId,
+        status: status
+      }
+      if (status === 'UNCOMMIT') {
+        form.isApproved = ''
+      }
+      let result = null;
+      if (this.type === 'rescue') {
+        if (flag == 0) {
+          form.rescueUser = ''
+        }
+        await updateRescue(form).then((res) => {
+          result = res
+        })
+      } else if (this.type === 'adopt') {
+        if (flag == 0) {
+          form.adoptUser = ''
+        }
+        await updateAdopt(form).then((res) => {
+          result = res
+        })
+      } else {
+        if (flag == 0) {
+          if (this.info.givee === this.userInfo.id) {
+            form.donor = ''
+          } else {
+            form.givee = ''
+          }
+        }
+        await updateResource(form).then((res) => {
+          result = res
+        })
+      }
+      if (result.code === 200) {
+        if (status === 'UNCOMMIT') {
+          this.active = 1
+          this.isChange = true
+        } else if (status === 'WAITING') {
+          this.active = 2
+          this.acceptInfo = null
+        } else if (this.info.status === 'UPLOAD') {
+          this.active = 3
+        }
+      } else {
+        this.$message.error("操作错误，请再次尝试！")
+      }
+    }
   },
   destroyed() {
     document.getElementsByClassName("main-container")[0].style['background-color'] = '#ffffff'
@@ -180,6 +253,8 @@ export default {
   margin-bottom: 5px;
 
   .main-body-show {
+    position: relative;
+
     .main-body-step-2 {
       .main-body-step-2-talk {
         .main-body-step-2-text {
@@ -226,6 +301,29 @@ export default {
         }
       }
 
+    }
+
+    .main-body-step-4 {
+      text-align: center;
+      font-size: 2em;
+      vertical-align: center;
+      padding: 2em 0 0 0;
+
+      .main-body-step-4-svg {
+        width: 4em;
+        height: 4em;
+        display: block;
+        margin: 0 calc(50% - 2em);
+        padding: 1em 0;
+      }
+
+      .main-body-step-4-svg-button {
+        width: 10em;
+        height: 10em;
+        display: block;
+        position: absolute;
+        right: 0em;
+      }
     }
   }
 }
