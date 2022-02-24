@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <div v-else class="rescueInfo-body-isUpload" v-if="!isUpload">
+    <div class="rescueInfo-body-isUpload" v-if="!isUpload">
       <div class="rescueInfo-body-message"
            v-if="form.isApproved === null">
         <svg-icon icon-class="wait" class="rescueInfo-body-message-svg"/>
@@ -142,7 +142,6 @@
           你的信息审核不通过,请检查后再次提交!
         </div>
       </div>
-
       <div class="rescueInfo-body-button">
         <el-button plain @click="updateAgain">再次编辑</el-button>
       </div>
@@ -152,7 +151,7 @@
 
 <script>
 import {pcaa} from 'area-data';
-import {addRescue, updateRescue, queryById} from "@/api/resuce";
+import {addRescue, updateRescue, queryRescueById} from "@/api/resuce";
 import {mapGetters} from "vuex";
 
 export default {
@@ -177,6 +176,15 @@ export default {
     } else {
       this.getInfoById(this.infoId)
       this.isUpload = false
+    }
+  },
+  watch: {
+    'form.isApproved': {
+      handler: function (newVal, oldVal) {
+        if (newVal && newVal === 'YES') {
+          //TODO 召唤父组件的方法
+        }
+      }
     }
   },
   data() {
@@ -277,7 +285,7 @@ export default {
   methods: {
     getInfoById(param) {
       this.listLoading = false
-      queryById(param).then(response => {
+      queryRescueById(param).then(response => {
         if (response.code == 200) {
           let temp = response.data
           this.form = {

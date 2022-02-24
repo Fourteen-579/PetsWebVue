@@ -39,7 +39,7 @@ export function deletedRescue(id) {
   })
 }
 
-export function queryById(id) {
+export function queryRescueById(id) {
   return request({
     url: '/rescue/' + id,
     method: 'get'
