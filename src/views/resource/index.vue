@@ -55,6 +55,9 @@ export default {
     this.getLabelOptions(search)
     this.fetchData()
   },
+  mounted() {
+    document.getElementsByClassName("main-container")[0].style['background-color'] = '#ffffff'
+  },
   methods: {
     getLabelOptions(search) {
       this.listLoading = true;

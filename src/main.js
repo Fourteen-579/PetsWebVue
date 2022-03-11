@@ -3,7 +3,7 @@ import Vue from 'vue'
 import moment from 'moment'
 
 Vue.prototype.$moment = moment
-//echarts
+
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 

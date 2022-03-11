@@ -61,6 +61,9 @@ export default {
   created() {
     this.fetchData()
   },
+  mounted() {
+    document.getElementsByClassName("main-container")[0].style['background-color'] = '#ffffff'
+  },
   methods: {
     load() {
       this.pageSizes += 4

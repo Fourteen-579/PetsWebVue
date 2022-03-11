@@ -3,12 +3,12 @@
        @mouseover="show = true"
        @mouseleave="show = false"
   >
-    <div class="adopt-block-main-l">
+    <div class="adopt-block-main-l" v-show="!show">
       <el-image
         class="main-img"
         :src="adoptItem.animal.beforAdoptPhoto"
         fit="cover"></el-image>
-      <div v-show="!show" class="adopt-block-main-l-des">
+      <div class="adopt-block-main-l-des">
         <div class="adopt-block-main-l-des-word">
           <div class="adopt-block-main-l-name" v-if="adoptItem.animal.name">
             我是{{ adoptItem.animal.name }}
@@ -33,67 +33,12 @@
                   <div class="adopt-block-animal-info-word">
                     {{ adoptItem.animal.name }}
                   </div>
-                  <svg-icon v-if="adoptItem.animal.sex === 'WOMAN'" icon-class="woman">{{
-                      sexOptions.find(function (value) {
-                        return value.value === adoptItem.animal.sex;
-                      }).label
-                    }}
-                  </svg-icon>
-                  <svg-icon v-if="adoptItem.animal.sex === 'MAN'" icon-class="man">{{
-                      sexOptions.find(function (value) {
-                        return value.value === adoptItem.animal.sex;
-                      }).label
-                    }}
-                  </svg-icon>
+                  <svg-icon :icon-class="adoptItem.animal.sex.toLowerCase()"/>
                 </div>
                 <div class="adopt-block-animal-info-text">
                   <div class="adopt-block-animal-info-type">
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'SNACK'"
-                              icon-class="snack">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'HAMSTER'"
-                              icon-class="hamster">{{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'RABBIT'"
-                              icon-class="rabbit">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'DOG'"
-                              icon-class="dog">{{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'CAT'"
-                              icon-class="cat">{{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="adopt-block-animal-info-type-svg" v-if="adoptItem.animal.type === 'OTHER'"
-                              icon-class="other">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === adoptItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-
+                    <svg-icon class="adopt-block-animal-info-type-svg"
+                              :icon-class="adoptItem.animal.type.toLowerCase()"/>
                   </div>
                 </div>
                 <div class="adopt-block-animal-info-text">
@@ -256,7 +201,6 @@ export default {
       position: absolute;
       width: 20em;
       height: 12.36em;
-      z-index: -1;
     }
 
     .adopt-block-main-l-des {
@@ -264,6 +208,7 @@ export default {
       background-color: rgba(0, 0, 0, 0.20);
       text-align: center;
       width: 100%;
+      position: absolute;
 
       .adopt-block-main-l-des-word {
         padding: 4em 1em 0em 1em;

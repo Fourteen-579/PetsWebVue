@@ -348,8 +348,7 @@
                 <el-select
                   clearable
                   v-model="form.animalDtoReq.sex"
-                  placeholder="请选择性别"
-                  :disabled="!form.findUser === id">
+                  placeholder="请选择性别">
                   <el-option
                     v-for="item in sexOptions"
                     :key="item.value"

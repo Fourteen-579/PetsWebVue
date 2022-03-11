@@ -49,6 +49,9 @@ export default {
   created() {
     this.fetchData()
   },
+  mounted() {
+    document.getElementsByClassName("main-container")[0].style['background-color'] = '#ffffff'
+  },
   methods: {
     // 获取数据
     fetchData() {

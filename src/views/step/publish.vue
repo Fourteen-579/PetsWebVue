@@ -254,7 +254,7 @@ export default {
         } else if (status === 'WAITING') {
           this.active = 2
           this.acceptInfo = null
-        } else if (this.info.status === 'UPLOAD') {
+        } else if (status === 'UPLOAD') {
           this.active = 3
           location.reload()
         }

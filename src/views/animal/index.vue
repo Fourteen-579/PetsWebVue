@@ -59,58 +59,12 @@
       </el-table-column>
       <el-table-column label="种类" width="120" align="center">
         <template slot-scope="scope">
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'SNACK'" icon-class="snack">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'HAMSTER'" icon-class="hamster">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'RABBIT'" icon-class="rabbit">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'DOG'" icon-class="dog">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'CAT'" icon-class="cat">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon style="width: 2em;height: 2em" v-if="scope.row.type === 'OTHER'" icon-class="other">{{
-              typeOptions.find(function (value) {
-                return value.value === scope.row.type;
-              }).label
-            }}
-          </svg-icon>
+          <svg-icon style="width: 2em;height: 2em" :icon-class="scope.row.type.toLowerCase()"/>
         </template>
       </el-table-column>
       <el-table-column label="性别" width="120" align="center">
         <template slot-scope="scope">
-          <svg-icon v-if="scope.row.sex === 'WOMAN'" icon-class="woman">{{
-              sexOptions.find(function (value) {
-                return value.value === scope.row.sex;
-              }).label
-            }}
-          </svg-icon>
-          <svg-icon v-if="scope.row.sex === 'MAN'" icon-class="man">{{
-              sexOptions.find(function (value) {
-                return value.value === scope.row.sex;
-              }).label
-            }}
-          </svg-icon>
+          <svg-icon :icon-class="scope.row.sex.toLowerCase()"/>
         </template>
       </el-table-column>
       <el-table-column label="年龄" width="120" align="center">

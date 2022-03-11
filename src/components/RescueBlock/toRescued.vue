@@ -3,12 +3,12 @@
        @mouseover="show = true"
        @mouseleave="show = false"
   >
-    <div class="rescue-block-main-l">
+    <div class="rescue-block-main-l" v-show="!show">
       <el-image
         class="main-img"
         :src="rescueItem.animal.beforRescuePhoto"
         fit="cover"></el-image>
-      <div v-show="!show" class="rescue-block-main-l-des">
+      <div class="rescue-block-main-l-des">
         <div class="rescue-block-main-l-des-word">
           <div class="rescue-block-main-l-name" v-if="rescueItem.animal.name">
             我是{{ rescueItem.animal.name }}
@@ -35,67 +35,12 @@
                   <div class="rescue-block-animal-info-word">
                     {{ rescueItem.animal.name }}
                   </div>
-                  <svg-icon v-if="rescueItem.animal.sex === 'WOMAN'" icon-class="woman">{{
-                      sexOptions.find(function (value) {
-                        return value.value === rescueItem.animal.sex;
-                      }).label
-                    }}
-                  </svg-icon>
-                  <svg-icon v-if="rescueItem.animal.sex === 'MAN'" icon-class="man">{{
-                      sexOptions.find(function (value) {
-                        return value.value === rescueItem.animal.sex;
-                      }).label
-                    }}
-                  </svg-icon>
+                  <svg-icon :icon-class="rescueItem.animal.sex.toLowerCase()"/>
                 </div>
                 <div class="rescue-block-animal-info-text">
                   <div class="rescue-block-animal-info-type">
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'SNACK'"
-                              icon-class="snack">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'HAMSTER'"
-                              icon-class="hamster">{{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'RABBIT'"
-                              icon-class="rabbit">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'DOG'"
-                              icon-class="dog">{{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'CAT'"
-                              icon-class="cat">{{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-                    <svg-icon class="rescue-block-animal-info-type-svg" v-if="rescueItem.animal.type === 'OTHER'"
-                              icon-class="other">
-                      {{
-                        typeOptions.find(function (value) {
-                          return value.value === rescueItem.animal.type;
-                        }).label
-                      }}
-                    </svg-icon>
-
+                    <svg-icon class="rescue-block-animal-info-type-svg"
+                              :icon-class="rescueItem.animal.type.toLowerCase()"/>
                   </div>
                 </div>
                 <div class="rescue-block-animal-info-text">
@@ -257,10 +202,10 @@ export default {
       position: absolute;
       width: 20em;
       height: 12.36em;
-      z-index: -1;
     }
 
     .rescue-block-main-l-des {
+      position: absolute;
       height: 12.36em;
       background-color: rgba(0, 0, 0, 0.20);
       text-align: center;
