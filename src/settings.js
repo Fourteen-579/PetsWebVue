@@ -14,5 +14,5 @@ module.exports = {
    */
   sidebarLogo: false,
 
-  url: 'http://192.168.1.6:8089/'
+  url: 'http://192.168.1.8:8089/'
 }

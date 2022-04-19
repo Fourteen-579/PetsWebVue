@@ -197,6 +197,7 @@ export default {
       this.listLoading = true;
       let param = {
         isBase: 'YES',
+        isStartBase:'YES',
         page: 1,
         pageSize: 3
       }

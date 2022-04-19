@@ -7,7 +7,7 @@ function resolve(dir) {
 }
 
 const name = 'PetsHelping' // page title
-const url = 'http://192.168.1.6:8089/'
+const url = 'http://192.168.1.8:8089/'
 
 // If your port is set to 80,
 // use administrator privileges to execute the command line.

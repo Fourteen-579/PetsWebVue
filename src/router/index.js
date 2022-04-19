@@ -31,6 +31,19 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  //首页
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '首页', icon: 'dashboard' }
+    }]
+  },
+
   //登录
   {
     path: '/login',
@@ -60,7 +73,7 @@ export const constantRoutes = [
     children: [{
       path: 'base',
       name: 'base',
-      component: () => import('@/views/base/index'),
+      component: () => import('@/views/base/index')
     }],
     hidden: true
   },
@@ -87,12 +100,12 @@ export const constantRoutes = [
     children: [{
       path: 'publish',
       name: 'publish',
-      component: () => import('@/views/step/publish'),
+      component: () => import('@/views/step/publish')
     },
       {
         path: 'accept',
         name: 'accept',
-        component: () => import('@/views/step/accept'),
+        component: () => import('@/views/step/accept')
       }],
     hidden: true
   },
@@ -105,12 +118,12 @@ export const constantRoutes = [
     children: [{
       path: 'user',
       name: 'user',
-      component: () => import('@/views/user/index'),
+      component: () => import('@/views/user/index')
     },
       {
         path: 'edit',
         name: 'edit',
-        component: () => import('@/views/user/edit'),
+        component: () => import('@/views/user/edit')
       }],
     hidden: true
   },
@@ -123,7 +136,7 @@ export const constantRoutes = [
     children: [{
       path: 'auth',
       name: 'auth',
-      component: () => import('@/views/auth/index'),
+      component: () => import('@/views/auth/index')
     }],
     hidden: true
   },
@@ -135,17 +148,17 @@ export const constantRoutes = [
     children: [{
       path: 'auth',
       name: 'auth',
-      component: () => import('@/views/file/index'),
+      component: () => import('@/views/file/index')
     },
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/file/user'),
+        component: () => import('@/views/file/user')
       },
       {
         path: 'policy',
         name: 'policy',
-        component: () => import('@/views/file/policy'),
+        component: () => import('@/views/file/policy')
       }],
     hidden: true
   },
@@ -158,7 +171,7 @@ export const constantRoutes = [
     children: [{
       path: 'adopted',
       name: 'adopted',
-      component: () => import('@/views/adopt/adopted'),
+      component: () => import('@/views/adopt/adopted')
     }],
     hidden: true
   },
@@ -171,7 +184,7 @@ export const constantRoutes = [
     children: [{
       path: 'toAdopted',
       name: 'toAdopted',
-      component: () => import('@/views/adopt/toAdopted'),
+      component: () => import('@/views/adopt/toAdopted')
     }],
     hidden: true
   },
@@ -184,7 +197,7 @@ export const constantRoutes = [
     children: [{
       path: 'rescued',
       name: 'rescued',
-      component: () => import('@/views/rescue/rescued'),
+      component: () => import('@/views/rescue/rescued')
     }],
     hidden: true
   },
@@ -197,7 +210,7 @@ export const constantRoutes = [
     children: [{
       path: 'toRescued',
       name: 'toRescued',
-      component: () => import('@/views/rescue/toRescued'),
+      component: () => import('@/views/rescue/toRescued')
     }],
     hidden: true
   },
@@ -210,7 +223,7 @@ export const constantRoutes = [
     children: [{
       path: 'donate',
       name: 'donate',
-      component: () => import('@/views/resource/donate'),
+      component: () => import('@/views/resource/donate')
     }],
     hidden: true
   },
@@ -223,22 +236,9 @@ export const constantRoutes = [
     children: [{
       path: 'demand',
       name: 'demand',
-      component: () => import('@/views/resource/demand'),
+      component: () => import('@/views/resource/demand')
     }],
     hidden: true
-  },
-
-  //首页
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: {title: '首页', icon: 'dashboard'}
-    }]
   },
 
   //救助信息页面
@@ -251,7 +251,7 @@ export const constantRoutes = [
         path: 'rescue',
         name: 'Rescue',
         component: () => import('@/views/rescue/index'),
-        meta: {title: '救助信息', icon: 'help1'}
+        meta: { title: '救助信息', icon: 'help1' }
       }]
   },
 
@@ -265,7 +265,7 @@ export const constantRoutes = [
         path: 'adopt',
         name: 'Adopt',
         component: () => import('@/views/adopt/index'),
-        meta: {title: '领养信息', icon: 'help2'}
+        meta: { title: '领养信息', icon: 'help2' }
       }
     ]
   },
@@ -280,7 +280,7 @@ export const constantRoutes = [
         path: 'resource',
         name: 'Resource',
         component: () => import('@/views/resource/index'),
-        meta: {title: '资源对接信息', icon: 'help3'}
+        meta: { title: '资源对接信息', icon: 'help3' }
       }
     ]
   },
@@ -295,7 +295,7 @@ export const constantRoutes = [
         path: 'propaganda',
         name: 'Propaganda',
         component: () => import('@/views/propaganda/index'),
-        meta: {title: '宣传信息', icon: 'propaganda'}
+        meta: { title: '宣传信息', icon: 'propaganda' }
       }
     ]
   },
@@ -312,12 +312,12 @@ export const constantRoutes = [
   },*/
 
   // 04 page must be placed at the end !!!
-  {path: '*', redirect: '/404', hidden: true}
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
 

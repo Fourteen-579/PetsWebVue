@@ -93,8 +93,7 @@ export default {
     let search = {
       page: 1,
       pageSize: 5,
-      isBase: 'YES',
-      isStartBase: 'YES'
+      isBase: 'YES'
     }
     this.getBase(search);
   },
